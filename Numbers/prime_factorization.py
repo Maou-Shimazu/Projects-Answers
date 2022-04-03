@@ -1,6 +1,4 @@
-import sys
 import math
-sys.setrecursionlimit(1000)
 
 def leastPrimeFactor(x: int) -> int:
     while x % 2 == 0:
