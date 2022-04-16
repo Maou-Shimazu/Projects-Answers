@@ -1,0 +1,7 @@
+*.exe
+*.pdb
+/target
+/src
+/.vscode
+*.toml
+*.lock
