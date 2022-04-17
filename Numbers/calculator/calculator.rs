@@ -105,7 +105,7 @@ fn main() {
         }
       }
       if sector != 2 {
-        println!("uh you did a susssy and forgor the second nubmer sdfjk or whatever, exiting now...");
+        println!("invalid equation!");
         std::process::exit(0);
       }
       let ans: String = doTheFrigginMath(first_operator, second_operator, equationMethod);
