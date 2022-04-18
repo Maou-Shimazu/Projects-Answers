@@ -1,0 +1,10 @@
+define variable text as string
+printr "Enter a word: "
+input text
+define variable reversed as string
+set reversed to text
+reverse text
+if text equals reversed
+    print "The word is a palindrome"
+else
+    print "The word is not a palindrome"
