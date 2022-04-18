@@ -45,6 +45,7 @@ fn getEquationMethod(equation: &str) -> &str {
          e if e.contains(&"-") => Operator::Sub,
          e if e.contains(&"*") => Operator::Mul,
          e if e.contains(&"/") => Operator::Div,
+         _                     => Operator::None,
      }
 }
  
@@ -57,7 +58,7 @@ fn doTheFrigginMath(first_operator: String, second_operator: String, equationMet
      Operator::Sub  => raw_op1 - raw_op2,
      Operator::Div  => raw_op1 / raw_op2,
      Operator::Mul  => raw_op1 * raw_op2,
-     Operator::None => NONE, 
+     Operator::None => "<No Operator>", 
   }.to_string()
 }
  
