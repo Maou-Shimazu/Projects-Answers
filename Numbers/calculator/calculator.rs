@@ -1,8 +1,16 @@
 // calculator repl impl by Outsider
+// Please check for any compilation error!
 use std::io;
 use std::io::Write;
 use std::process::Command;
  
+enum Operator {
+    Add,
+    Sub,
+    Mul,
+    Div,
+    None,
+}
 
 fn getline(inputPrompt: &str) -> String {
     print!("{}> {}{}{}{}", "\x1b[0;34m", "\x1b[0;0m", "\x1b[0;37m", inputPrompt, "\x1b[0;0m");
@@ -31,55 +39,26 @@ fn clearscr() {
   }
 }
  
-fn getEquationMethod(equation: &str) -> String {
-  let ADD = "+".to_string();
-  let SUBTRACT = "-".to_string();
-  let DIVIDE = "/".to_string();
-  let MULTIPLY = "*".to_string();
-  let NONE = "".to_string();
-  equation.to_owned();
- 
-  if equation.contains(&ADD) {
-    return ADD;
-  }
-  else if equation.contains(&SUBTRACT) {
-    return SUBTRACT;
-  }
-  else if equation.contains(&DIVIDE) {
-    return DIVIDE;
-  }
-  else if equation.contains(&MULTIPLY) {
-    return MULTIPLY;
-  }
-  else {
-    return NONE;
-  }
+fn getEquationMethod(equation: &str) -> &str {
+     match equation {
+         e if e.contains(&"+") => Operator::Add,
+         e if e.contains(&"-") => Operator::Sub,
+         e if e.contains(&"*") => Operator::Mul,
+         e if e.contains(&"/") => Operator::Div,
+     }
 }
  
-fn doTheFrigginMath(first_operator: String, second_operator: String, equationMethod: String) -> String {
-  let ADD = "+";
-  let SUBTRACT = "-";
-  let DIVIDE = "/";
-  let MULTIPLY = "*";
-  let NONE = "";
+fn doTheFrigginMath(first_operator: String, second_operator: String, equationMethod: &str) -> String {
+  // this can error with invalid input
   let raw_op1 = first_operator.parse::<usize>().unwrap();
   let raw_op2 = second_operator.parse::<usize>().unwrap();
- 
-  if &equationMethod == ADD {
-    return (raw_op1+raw_op2).to_string();
-  }
-  else if &equationMethod == SUBTRACT {
-    return (raw_op1-raw_op2).to_string();
-  }
-  else if &equationMethod == DIVIDE {
-    return (raw_op1/raw_op2).to_string()
-  }
-  else if &equationMethod == MULTIPLY {
-    return (raw_op1*raw_op2).to_string()
-  }
-  else {
-    return NONE.to_string();
-  }
+  match equationMethod {
+     Operator::Add  => raw_op1 + raw_op2,
+     Operator::Sub  => raw_op1 - raw_op2,
+     Operator::Div  => raw_op1 / raw_op2,
+     Operator::Mul  => raw_op1 * raw_op2,
+     Operator::None => NONE, 
+  }.to_string()
 }
  
  
@@ -87,7 +66,7 @@ fn main() {
     clearscr();
     loop {
       let mut equation: String = getline("calculator-repl: ");
-      let equationMethod: String = getEquationMethod(&equation);
+      let equationMethod: &str = getEquationMethod(&equation);
       let mut sector = 1;
       let mut first_operator = String::new();
       let mut second_operator = String::new();
@@ -108,7 +87,6 @@ fn main() {
         println!("invalid equation!");
         std::process::exit(0);
       }
-      let ans: String = doTheFrigginMath(first_operator, second_operator, equationMethod);
-      println!("{}", ans);
+      println!("{}", doTheFrigginMath(first_operator, second_operator, equationMethod));
     }
 }
