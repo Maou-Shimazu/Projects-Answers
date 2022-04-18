@@ -1,6 +1,6 @@
-<h1 style="text-align:center;"> Projects Answers</h1>
+<h1 style="text-align:center"> Projects Answers</h1>
 
-## Projects Answers is a collection of various code answers from different contributors in relation to the [Projects](https://github.com/karan/Projects) repository.
+### Projects Answers is a collection of various code answers from different contributors in relation to the [Projects](https://github.com/karan/Projects) repository.
 #### We encourage code creativity on any answer. Certain challenges may be easy depending on the language, so how creative can you make those solutions?
 #### This project is completely open source and available to anyone who wishes to contribute. The contribution guidelines are as follows below.
 
