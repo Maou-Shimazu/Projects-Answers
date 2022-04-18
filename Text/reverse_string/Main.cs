@@ -16,7 +16,7 @@ namespace actual_str_reverse
             return reversed;
         }
     }
-    class Program
+    class Main
     {
         static void Main(string[] args)
         {
