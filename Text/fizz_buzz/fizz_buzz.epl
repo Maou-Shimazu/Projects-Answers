@@ -1,0 +1,14 @@
+declare function(fizzbuzz at {number n}) returning void
+    if n is divisible by 15
+        print "FizzBuzz"
+    else if n is divisible by 3
+        print "Fizz"
+    else if n is divisible by 5
+        print "Buzz"
+    else
+        print n
+    if n is smaller than 100
+        add 1 to n
+        fizzbuzz at n
+
+fizzbuzz at 0
