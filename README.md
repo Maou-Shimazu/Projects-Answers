@@ -7,6 +7,6 @@
 ## Contribution
 - [x] Be familiar with git and github.
 - [x] When adding a code solution, place it in a folder in correspondence to the solution type and section. The name of the folder should be the same as the project.
-- [ ] When creating a folder follow a snake case format, if it contains only 1 word, keep it lowercase.
+- [x] When creating a folder follow a snake case format, if it contains only 1 word, keep it lowercase. Files follow the same format, either call it by the project name + extention, or main.extention.
 - [x] Have somewhat descriptive commit and pr messages.
 - [x] If you have a different implimentation for something but do not want to build upon a previous answer, add a comment at EOF and your implimentation below that to let people know there are multiple implimentations. 
