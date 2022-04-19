@@ -1,4 +1,3 @@
-//fibonacci sequence in javascript 
 let readlineSync = require("readline-sync");
 
 let loc = parseInt(readlineSync.question("Enter number you want to go up to: "));
