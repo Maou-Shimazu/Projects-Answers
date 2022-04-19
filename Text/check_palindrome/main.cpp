@@ -1,7 +1,7 @@
 #include <iostream>
 int main() {
     std::string str;
-    std::cout << "Word to check for palindrome: ";
+    std::cout << "Enter a word: ";
     std::cin >> str;
     for (int i = 0, len = str.length(), j = len - 1; i < j; i++, j--) {
         if (str[i] != str[j]) {
