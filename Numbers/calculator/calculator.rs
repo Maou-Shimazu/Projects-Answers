@@ -444,15 +444,15 @@ impl<'a> Parser<'a> {
     fn unary(&mut self) -> Rc<AST<'a>> {
         match self.token.token_type {
             Type::Operator(op @ (Operator::Add | Operator::Sub)) => {
-                let rng = self.token.range.range();
+                let rng = self.token.range;
                 let start = self.token.range.start;
                 self.adv();
                 if self.eof() {
                     self.err(format!(
-                        "Invalid or unexpected token: `{}`!", &self.src[rng.clone()],
-                    ), "", Span::rng(rng.clone()));
+                        "Invalid or unexpected token: `{}`!", &self.src[rng.range()],
+                    ), "", Span::from(rng.start, rng.end));
                     self.adv();
-                    return Rc::new(AST::Invalid { span : Span::rng(rng) });
+                    return Rc::new(AST::Invalid { span : Span::from(rng.start, rng.end) });
                 }
                 let unary = self.unary();
                 Rc::new(AST::UnaryOp { span : Span::from(start, unary.span().end), rhs : unary, op })
@@ -560,19 +560,17 @@ impl Results {
 
 /// Interprets the parsed AST structure and returns a [`Results`]
 struct Interpreter<'a> {
-    exprs : Vec<Rc<AST<'a>>>,
     vars  : HashMap<&'a str, f64>,
     src   : &'a str,
 }
 
 impl<'a> Interpreter<'a> {
-    pub fn from(exprs : Vec<Rc<AST<'a>>>, vars : HashMap<&'a str, f64>, src : &'a str) -> Self {
-        Self { exprs, vars, src }
+    pub fn from(vars : HashMap<&'a str, f64>, src : &'a str) -> Self {
+        Self { vars, src }
     }
 
-    pub fn run(mut self) -> (Vec<Option<Results>>, HashMap<&'a str, f64>) {
+    pub fn run(mut self, exprs : Vec<Rc<AST<'a>>>) -> (Vec<Option<Results>>, HashMap<&'a str, f64>) {
         let mut values = Vec::new();
-        let exprs = self.exprs.clone();
         for expr in exprs {
             values.push(self.visit(expr));
         }
@@ -581,7 +579,7 @@ impl<'a> Interpreter<'a> {
 
     // crude visitor implementation
     fn visit(&mut self, ast : Rc<AST<'a>>) -> Option<Results> {
-        match &*ast.clone() {
+        match &*ast {
             AST::BinaryOp { lhs, rhs, op, span } =>
                 self.binary(Rc::clone(lhs), Rc::clone(rhs), *op, *span),
 
@@ -639,14 +637,34 @@ impl<'a> Interpreter<'a> {
 
     fn binary(&mut self, lhs : Rc<AST<'a>>, rhs : Rc<AST<'a>>, op : Operator, span : Span) -> Option<Results> {
         let lhs = self.visit(lhs)?.number()?;
-        let rhs = self.visit(rhs)?.number()?;
+        let rhsn = self.visit(Rc::clone(&rhs))?.number()?;
         Some(match op {
-            Operator::Add => Results::Number(lhs + rhs),
-            Operator::Sub => Results::Number(lhs - rhs),
-            Operator::Mul => Results::Number(lhs * rhs),
-            Operator::Div => Results::Number(lhs / rhs),
-            Operator::Exp => Results::Number(lhs.powf(rhs)),
-            Operator::Mod => Results::Number(lhs % rhs),
+            Operator::Add => Results::Number(lhs + rhsn),
+            Operator::Sub => Results::Number(lhs - rhsn),
+            Operator::Mul => Results::Number(lhs * rhsn),
+            Operator::Div => {
+                if rhsn == 0.0 {
+                    self.err(
+                        "Cannot divide a number by zero!".to_owned(),
+                        "Use another number here, not zero",
+                        rhs.span()
+                    );
+                    return Some(Results::Invalid);
+                }
+                Results::Number(lhs / rhsn)
+            },
+            Operator::Exp => Results::Number(lhs.powf(rhsn)),
+            Operator::Mod => {
+                if rhsn == 0.0 {
+                    self.err(
+                        "Cannot get the remainder of a number by zero!".to_owned(),
+                        "Use another number here, not zero",
+                        rhs.span()
+                    );
+                    return Some(Results::Invalid);
+                }
+                Results::Number(lhs % rhsn)
+            },
             _             => {
                 self.err(
                     format!("Unexpected operator `{}`!", op),
@@ -700,6 +718,7 @@ fn main() {
          Type `token` to toggle the display of processed text as tokens.\n\
          Type `tree` to toggle the display of processed text as abstract syntax trees (AST).\n\
          Type `time` to toggle the display of compute time from lexing to interpreting the input\n\
+         Type `compact` to toggle compact results. Results will show horizontally in compact mode.\n\
          - Note: This also includes the time spent printing out the trees, tokens and errors\n\
          Type `delete [variable], [variable], ...` to delete variables.\n\
          Type `repeat` | `prev` to re-run the previous computation.\n\
@@ -715,6 +734,7 @@ fn main() {
     let mut show_lexed  = false;
     let mut show_parsed = false;
     let mut show_time = false;
+    let mut compact_mode = false;
     let mut prev = "";
     // store variables persistently until the end of the session
     let mut vars = HashMap::new();
@@ -742,6 +762,12 @@ fn main() {
             "time" => {
                 show_time = !show_time;
                 println!("Now{} showing elapsed time for computing.", if show_time { "" } else { " not" });
+                continue;
+            }
+
+            "compact" => {
+                compact_mode = !compact_mode;
+                println!("Now{} using compact mode.", if compact_mode { "" } else { " not" });
                 continue;
             }
 
@@ -798,17 +824,19 @@ fn main() {
         if let Some(parser) = parser {
             let (exprs, errored) = parser.parse();
             if show_parsed {
-                for expr in exprs.clone() {
+                for expr in &exprs {
                     println!("Tree: {}", expr);
                 }
             }
             // run interpreter if no errors were found
             if !errored {
-                let interpreter = Interpreter::from(exprs, vars.clone(), src);
-                let (values, new_vars) = interpreter.run();
-                if show_time {
-                    println!("Time taken to compute: {:?}", elapsed.elapsed());
-                }
+                let expr_len = exprs.len();
+                let interpreter = Interpreter::from(vars, src);
+                let (values, new_vars) =
+                    interpreter.run(exprs);
+                let time = elapsed.elapsed();
+
+                let mut vec = Vec::with_capacity(expr_len);
                 for value in values {
                     let out = match value {
                         Some(Results::Number(num)) => {
@@ -820,7 +848,17 @@ fn main() {
                         },
                         _ => "Runtime Error".to_owned(),
                     };
-                    println!("Result: {}", out);
+                    if !compact_mode {
+                        println!("Result: {}", out);
+                    } else {
+                        vec.push(out);
+                    }
+                }
+                if compact_mode {
+                    println!("Result(s): [ {} ]", vec.join(", "));
+                }
+                if show_time {
+                    println!("Time taken to compute: {:?}", time);
                 }
                 vars = new_vars;
             }
@@ -830,4 +868,4 @@ fn main() {
         prev = src;
     }
 }
-// 705 loc - cloc
+// 741 loc - cloc
