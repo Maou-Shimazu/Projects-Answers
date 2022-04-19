@@ -16,10 +16,10 @@ int main()
     for (int i = 0; i < stoi(times_as_str); i++) {
         switch (randint(0, 1)) {
         case 0:
-            cout << "heads!" << endl;
+            cout << "Heads!" << endl;
             break;
         case 1:
-            cout << "tails!" << endl;
+            cout << "Tails!" << endl;
             break;
         }
     }
