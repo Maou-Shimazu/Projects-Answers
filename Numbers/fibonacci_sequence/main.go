@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
+  "fmt"
 )
 
 func main() {
-	fmt.Println("Enter the number you want calculated up to...")
+  fmt.Println("Enter the number you want calculated up to...")
   var loc int
   fmt.Scan(&loc)
   sequence := []int{0, 1}
