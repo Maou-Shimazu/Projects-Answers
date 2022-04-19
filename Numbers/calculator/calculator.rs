@@ -22,7 +22,7 @@ enum Operator {
 }
 
 impl Display for Operator {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f : &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", match self {
             Operator::Add => "+",
             Operator::Sub => "-",
@@ -53,7 +53,7 @@ impl Type {
     pub fn operator(&self) -> Operator {
         match self {
             Type::Operator(op) => *op,
-            _                   => panic!("The type is not of type `Operator`! It is: {:?}", &self),
+            _ => panic!("The type is not of type `Operator`! It is: {:?}", &self),
         }
     }
 }
@@ -99,10 +99,9 @@ struct Token {
 impl Token {
     pub fn show(&self, source : &str) -> String {
         format! (
-            "Token {{ Type: {:?}, Pos: {}..{}, Value: {:?} }}",
+            "Token {{ Type: {:?}, Pos: {:?}, Value: {:?} }}",
             self.token_type,
-            self.range.start,
-            self.range.end,
+            self.range,
             &source[self.range.range()]
         )
     }
@@ -123,12 +122,12 @@ impl<'a> Err<'a> {
 
     pub fn show(&self) -> String {
         format!(
-            "Error: {}\n{}\n{}{} {}{}",
+            "Error: {}\n{}\n{}{}{}{}",
             self.message,
             self.src,
             " ".repeat(self.range.start),
             "^".repeat(self.range.end - self.range.start),
-            if self.side_msg.is_empty() { "" } else { "- " },
+            if self.side_msg.is_empty() { "" } else { " - " },
             self.side_msg,
         )
     }
@@ -212,15 +211,11 @@ impl<'a> Lexer<'a> {
                 })
             },
 
-            c if c.is_alphanumeric() || c == '_'  => {
+            c if c.is_alphanumeric() || matches!(c, '_' | '\'' | '~' | '#')  => {
                 // allows identifiers such as `_919#`, `_~#.`, `ident`, `_'_~_.` etc
                 let range =
                     self.take_while(|c|
-                        c.is_alphanumeric() ||
-                        c == '_'            ||
-                        c == '~'            ||
-                        c == '#'            ||
-                        c == '\''
+                        c.is_alphanumeric() || matches!(c, '_' | '~' | '#' | '\'')
                     );
                 Some(Token {
                     token_type : Type::Identifier,
@@ -287,17 +282,15 @@ impl Display for AST<'_> {
             AST::BinaryOp { lhs, rhs, op, .. } =>
                 write!(f, "({} {} {})", *lhs, *op, *rhs),
 
-            AST::UnaryOp {                  rhs, op, .. } =>
+            AST::UnaryOp { rhs, op, .. } =>
                 write!(f, "[{}{}]", *op, *rhs),
-
-            AST::Number { value, .. } =>
-                write!(f, "{}", value),
-
-            AST::Invoke { value, .. } =>
-                write!(f, "{{{}}}", value),
 
             AST::Assign { value, rhs, .. } =>
                 write!(f, "[{{{}}} = {}]", value, rhs),
+
+            AST::Number { value, .. } => write!(f, "{}", value),
+
+            AST::Invoke { value, .. } => write!(f, "{{{}}}", value),
 
             AST::Invalid { .. } => write!(f, "Invalid Syntax"),
         }
@@ -710,10 +703,13 @@ fn read_input() -> String {
 
 fn main() {
     let commands =
-        "Type `quit` to exit the program.\n\
+        "Type `quit` | `exit` to exit the program.\n\
          Type `token` to toggle the display of processed text as tokens.\n\
          Type `tree` to toggle the display of processed text as abstract syntax trees (AST).\n\
+         Type `time` to toggle the display of compute time from lexing to interpreting the input\n\
+         - Note: This also includes the time spent printing out the trees, tokens and errors\n\
          Type `delete [variable], [variable], ...` to delete variables.\n\
+         Type `repeat` | `prev` to re-run the previous computation.\n\
          Type `command` to display this message.";
     let instructions =
         "Semicolons separate expressions i.e. `5; 10` would result in 2 answers, 5 and 10\n\
@@ -725,13 +721,15 @@ fn main() {
     println!("Welcome to this calculator!\n{}\n{}", commands, instructions);
     let mut show_lexed  = false;
     let mut show_parsed = false;
+    let mut show_time = false;
+    let mut prev = "";
     // store variables persistently until the end of the session
     let mut vars = HashMap::new();
     loop {
-        let src = read_input();
+        let mut src = read_input();
         // commands
         match &*src.trim().to_lowercase() {
-            "quit" => {
+            "quit" | "exit" => {
                 println!("Bye bye!");
                 std::process::exit(0);
             },
@@ -748,6 +746,12 @@ fn main() {
                 continue;
             }
 
+            "time" => {
+                show_time = !show_time;
+                println!("Now{} showing elapsed time for computing.", if show_parsed { "" } else { " not" });
+                continue;
+            }
+
             "command" => {
                 println!("{}", commands);
                 continue;
@@ -758,7 +762,7 @@ fn main() {
                 continue;
             }
 
-            v if v.split_once(' ').unwrap_or(("", "")).0 == "delete" => {
+            v if v.starts_with("delete") => {
                 let vals = v.split_once(' ').unwrap().1.split(',');
                 for val in vals {
                     let trimmed = val.trim();
@@ -773,9 +777,20 @@ fn main() {
                 continue;
             }
 
+            "repeat" | "prev" => {
+                if !prev.trim().is_empty() {
+                    println!("Running previous input: {}", prev);
+                    src = prev.to_owned();
+                } else {
+                    println!("Nothing to repeat!");
+                    continue;
+                }
+            }
+
             _ => (),
         };
-        // leaks source string so that it lives long enough (until the program ends) for the variables to be persistant
+        let elapsed = std::time::Instant::now();
+        // leaks source string so that it lives long enough (until the program ends) for the variables to be persistent
         let src = Box::leak(src.into_boxed_str());
         let mut lexer = Lexer::from(src);
         let mut tokens = Vec::with_capacity(src.len());
@@ -798,6 +813,9 @@ fn main() {
             if !errored {
                 let interpreter = Interpreter::from(exprs, vars.clone(), src);
                 let (values, new_vars) = interpreter.run();
+                if show_time {
+                    println!("Time taken to compute: {:?}", elapsed.elapsed());
+                }
                 for value in values {
                     println!("Result: {}",
                              if let Some(value) = value {
@@ -811,6 +829,7 @@ fn main() {
         } else {
             println!("Empty Input.\nResult: 0");
         }
+        prev = src;
     }
 }
-// 690 loc - cloc
+// 707 loc - cloc
