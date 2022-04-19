@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Mega Project List</title>
+    <style>
+        :root {
+            --markdown-font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", system-ui, "Ubuntu", "Droid Sans", sans-serif;
+            --markdown-font-size: 14px;
+            --markdown-line-height: 1.6;
+            --vscode-font-family: "Segoe WPC", "Segoe UI", sans-serif;
+            --vscode-font-weight: normal;
+            --vscode-font-size: 13px;
+            --vscode-editor-font-family: Consolas, "Courier New", monospace;
+            --vscode-editor-font-weight: normal;
+            --vscode-editor-font-size: 14px;
+            --vscode-foreground: #616161;
+            --vscode-errorForeground: #a1260d;
+            --vscode-descriptionForeground: #717171;
+            --vscode-icon-foreground: #424242;
+            --vscode-focusBorder: #0090f1;
+            --vscode-textSeparator-foreground: rgba(0, 0, 0, 0.18);
+            --vscode-textLink-foreground: #006ab1;
+            --vscode-textLink-activeForeground: #006ab1;
+            --vscode-textPreformat-foreground: #a31515;
+            --vscode-textBlockQuote-background: rgba(127, 127, 127, 0.1);
+            --vscode-textBlockQuote-border: rgba(0, 122, 204, 0.5);
+            --vscode-textCodeBlock-background: rgba(220, 220, 220, 0.4);
+            --vscode-widget-shadow: #a8a8a8;
+            --vscode-input-background: #ffffff;
+            --vscode-input-foreground: #616161;
+            --vscode-inputOption-activeBorder: rgba(0, 122, 204, 0);
+            --vscode-inputOption-activeBackground: rgba(0, 144, 241, 0.2);
+            --vscode-inputOption-activeForeground: #000000;
+            --vscode-input-placeholderForeground: #767676;
+            --vscode-inputValidation-infoBackground: #d6ecf2;
+            --vscode-inputValidation-infoBorder: #007acc;
+            --vscode-inputValidation-warningBackground: #f6f5d2;
+            --vscode-inputValidation-warningBorder: #b89500;
+            --vscode-inputValidation-errorBackground: #f2dede;
+            --vscode-inputValidation-errorBorder: #be1100;
+            --vscode-dropdown-background: #ffffff;
+            --vscode-dropdown-border: #cecece;
+            --vscode-checkbox-background: #ffffff;
+            --vscode-checkbox-border: #cecece;
+            --vscode-button-foreground: #ffffff;
+            --vscode-button-background: #007acc;
+            --vscode-button-hoverBackground: #0062a3;
+            --vscode-button-secondaryForeground: #ffffff;
+            --vscode-button-secondaryBackground: #5f6a79;
+            --vscode-button-secondaryHoverBackground: #4c5561;
+            --vscode-badge-background: #c4c4c4;
+            --vscode-badge-foreground: #333333;
+            --vscode-scrollbar-shadow: #dddddd;
+            --vscode-scrollbarSlider-background: rgba(100, 100, 100, 0.4);
+            --vscode-scrollbarSlider-hoverBackground: rgba(100, 100, 100, 0.7);
+            --vscode-scrollbarSlider-activeBackground: rgba(0, 0, 0, 0.6);
+            --vscode-progressBar-background: #0e70c0;
+            --vscode-editorError-foreground: #e51400;
+            --vscode-editorWarning-foreground: #e9a700;
+            --vscode-editorInfo-foreground: #75beff;
+            --vscode-editorHint-foreground: #6c6c6c;
+            --vscode-editor-background: #ffffff;
+            --vscode-editor-foreground: #000000;
+            --vscode-editorWidget-background: #f3f3f3;
+            --vscode-editorWidget-foreground: #616161;
+            --vscode-editorWidget-border: #c8c8c8;
+            --vscode-quickInput-background: #f3f3f3;
+            --vscode-quickInput-foreground: #616161;
+            --vscode-quickInputTitle-background: rgba(0, 0, 0, 0.06);
+            --vscode-pickerGroup-foreground: #0066bf;
+            --vscode-pickerGroup-border: #cccedb;
+            --vscode-editor-selectionBackground: #add6ff;
+            --vscode-editor-inactiveSelectionBackground: #e5ebf1;
+            --vscode-editor-selectionHighlightBackground: rgba(173, 214, 255, 0.5);
+            --vscode-editor-findMatchBackground: #a8ac94;
+            --vscode-editor-findMatchHighlightBackground: rgba(234, 92, 0, 0.33);
+            --vscode-editor-findRangeHighlightBackground: rgba(180, 180, 180, 0.3);
+            --vscode-searchEditor-findMatchBackground: rgba(234, 92, 0, 0.22);
+            --vscode-editor-hoverHighlightBackground: rgba(173, 214, 255, 0.15);
+            --vscode-editorHoverWidget-background: #f3f3f3;
+            --vscode-editorHoverWidget-foreground: #616161;
+            --vscode-editorHoverWidget-border: #c8c8c8;
+            --vscode-editorHoverWidget-statusBarBackground: #e7e7e7;
+            --vscode-editorLink-activeForeground: #0000ff;
+            --vscode-editorLightBulb-foreground: #ddb100;
+            --vscode-editorLightBulbAutoFix-foreground: #007acc;
+            --vscode-diffEditor-insertedTextBackground: rgba(155, 185, 85, 0.2);
+            --vscode-diffEditor-removedTextBackground: rgba(255, 0, 0, 0.2);
+            --vscode-diffEditor-diagonalFill: rgba(34, 34, 34, 0.2);
+            --vscode-list-focusBackground: #d6ebff;
+            --vscode-list-activeSelectionBackground: #0074e8;
+            --vscode-list-activeSelectionForeground: #ffffff;
+            --vscode-list-inactiveSelectionBackground: #e4e6f1;
+            --vscode-list-hoverBackground: #e8e8e8;
+            --vscode-list-dropBackground: #d6ebff;
+            --vscode-list-highlightForeground: #0066bf;
+            --vscode-list-invalidItemForeground: #b89500;
+            --vscode-list-errorForeground: #b01011;
+            --vscode-list-warningForeground: #855f00;
+            --vscode-listFilterWidget-background: #efc1ad;
+            --vscode-listFilterWidget-outline: rgba(0, 0, 0, 0);
+            --vscode-listFilterWidget-noMatchesOutline: #be1100;
+            --vscode-list-filterMatchBackground: rgba(234, 92, 0, 0.33);
+            --vscode-tree-indentGuidesStroke: #a9a9a9;
+            --vscode-list-deemphasizedForeground: #8e8e90;
+            --vscode-menu-foreground: #616161;
+            --vscode-menu-background: #ffffff;
+            --vscode-menu-selectionForeground: #ffffff;
+            --vscode-menu-selectionBackground: #0074e8;
+            --vscode-menu-separatorBackground: #888888;
+            --vscode-editor-snippetTabstopHighlightBackground: rgba(10, 50, 100, 0.2);
+            --vscode-editor-snippetFinalTabstopHighlightBorder: rgba(10, 50, 100, 0.5);
+            --vscode-breadcrumb-foreground: rgba(97, 97, 97, 0.8);
+            --vscode-breadcrumb-background: #ffffff;
+            --vscode-breadcrumb-focusForeground: #4e4e4e;
+            --vscode-breadcrumb-activeSelectionForeground: #4e4e4e;
+            --vscode-breadcrumbPicker-background: #f3f3f3;
+            --vscode-merge-currentHeaderBackground: rgba(64, 200, 174, 0.5);
+            --vscode-merge-currentContentBackground: rgba(64, 200, 174, 0.2);
+            --vscode-merge-incomingHeaderBackground: rgba(64, 166, 255, 0.5);
+            --vscode-merge-incomingContentBackground: rgba(64, 166, 255, 0.2);
+            --vscode-merge-commonHeaderBackground: rgba(96, 96, 96, 0.4);
+            --vscode-merge-commonContentBackground: rgba(96, 96, 96, 0.16);
+            --vscode-editorOverviewRuler-currentContentForeground: rgba(64, 200, 174, 0.5);
+            --vscode-editorOverviewRuler-incomingContentForeground: rgba(64, 166, 255, 0.5);
+            --vscode-editorOverviewRuler-commonContentForeground: rgba(96, 96, 96, 0.4);
+            --vscode-editorOverviewRuler-findMatchForeground: rgba(209, 134, 22, 0.49);
+            --vscode-editorOverviewRuler-selectionHighlightForeground: rgba(160, 160, 160, 0.8);
+            --vscode-minimap-findMatchHighlight: #d18616;
+            --vscode-minimap-selectionHighlight: #add6ff;
+            --vscode-minimap-errorHighlight: rgba(255, 18, 18, 0.7);
+            --vscode-minimap-warningHighlight: #e9a700;
+            --vscode-minimapSlider-background: rgba(100, 100, 100, 0.2);
+            --vscode-minimapSlider-hoverBackground: rgba(100, 100, 100, 0.35);
+            --vscode-minimapSlider-activeBackground: rgba(0, 0, 0, 0.3);
+            --vscode-problemsErrorIcon-foreground: #e51400;
+            --vscode-problemsWarningIcon-foreground: #e9a700;
+            --vscode-problemsInfoIcon-foreground: #75beff;
+            --vscode-editor-lineHighlightBorder: #eeeeee;
+            --vscode-editor-rangeHighlightBackground: rgba(253, 255, 0, 0.2);
+            --vscode-editor-symbolHighlightBackground: rgba(234, 92, 0, 0.33);
+            --vscode-editorCursor-foreground: #000000;
+            --vscode-editorWhitespace-foreground: rgba(51, 51, 51, 0.2);
+            --vscode-editorIndentGuide-background: #d3d3d3;
+            --vscode-editorIndentGuide-activeBackground: #939393;
+            --vscode-editorLineNumber-foreground: #237893;
+            --vscode-editorActiveLineNumber-foreground: #0b216f;
+            --vscode-editorLineNumber-activeForeground: #0b216f;
+            --vscode-editorRuler-foreground: #d3d3d3;
+            --vscode-editorCodeLens-foreground: #999999;
+            --vscode-editorBracketMatch-background: rgba(0, 100, 0, 0.1);
+            --vscode-editorBracketMatch-border: #b9b9b9;
+            --vscode-editorOverviewRuler-border: rgba(127, 127, 127, 0.3);
+            --vscode-editorGutter-background: #ffffff;
+            --vscode-editorUnnecessaryCode-opacity: rgba(0, 0, 0, 0.47);
+            --vscode-editorOverviewRuler-rangeHighlightForeground: rgba(0, 122, 204, 0.6);
+            --vscode-editorOverviewRuler-errorForeground: rgba(255, 18, 18, 0.7);
+            --vscode-editorOverviewRuler-warningForeground: #e9a700;
+            --vscode-editorOverviewRuler-infoForeground: #75beff;
+            --vscode-editorOverviewRuler-bracketMatchForeground: #a0a0a0;
+            --vscode-symbolIcon-arrayForeground: #616161;
+            --vscode-symbolIcon-booleanForeground: #616161;
+            --vscode-symbolIcon-classForeground: #d67e00;
+            --vscode-symbolIcon-colorForeground: #616161;
+            --vscode-symbolIcon-constantForeground: #616161;
+            --vscode-symbolIcon-constructorForeground: #652d90;
+            --vscode-symbolIcon-enumeratorForeground: #d67e00;
+            --vscode-symbolIcon-enumeratorMemberForeground: #007acc;
+            --vscode-symbolIcon-eventForeground: #d67e00;
+            --vscode-symbolIcon-fieldForeground: #007acc;
+            --vscode-symbolIcon-fileForeground: #616161;
+            --vscode-symbolIcon-folderForeground: #616161;
+            --vscode-symbolIcon-functionForeground: #652d90;
+            --vscode-symbolIcon-interfaceForeground: #007acc;
+            --vscode-symbolIcon-keyForeground: #616161;
+            --vscode-symbolIcon-keywordForeground: #616161;
+            --vscode-symbolIcon-methodForeground: #652d90;
+            --vscode-symbolIcon-moduleForeground: #616161;
+            --vscode-symbolIcon-namespaceForeground: #616161;
+            --vscode-symbolIcon-nullForeground: #616161;
+            --vscode-symbolIcon-numberForeground: #616161;
+            --vscode-symbolIcon-objectForeground: #616161;
+            --vscode-symbolIcon-operatorForeground: #616161;
+            --vscode-symbolIcon-packageForeground: #616161;
+            --vscode-symbolIcon-propertyForeground: #616161;
+            --vscode-symbolIcon-referenceForeground: #616161;
+            --vscode-symbolIcon-snippetForeground: #616161;
+            --vscode-symbolIcon-stringForeground: #616161;
+            --vscode-symbolIcon-structForeground: #616161;
+            --vscode-symbolIcon-textForeground: #616161;
+            --vscode-symbolIcon-typeParameterForeground: #616161;
+            --vscode-symbolIcon-unitForeground: #616161;
+            --vscode-symbolIcon-variableForeground: #007acc;
+            --vscode-editor-foldBackground: rgba(173, 214, 255, 0.3);
+            --vscode-editorGutter-foldingControlForeground: #424242;
+            --vscode-editor-onTypeRenameBackground: rgba(255, 0, 0, 0.3);
+            --vscode-editorSuggestWidget-background: #f3f3f3;
+            --vscode-editorSuggestWidget-border: #c8c8c8;
+            --vscode-editorSuggestWidget-foreground: #000000;
+            --vscode-editorSuggestWidget-selectedBackground: #d6ebff;
+            --vscode-editorSuggestWidget-highlightForeground: #0066bf;
+            --vscode-editor-wordHighlightBackground: rgba(87, 87, 87, 0.25);
+            --vscode-editor-wordHighlightStrongBackground: rgba(14, 99, 156, 0.25);
+            --vscode-editorOverviewRuler-wordHighlightForeground: rgba(160, 160, 160, 0.8);
+            --vscode-editorOverviewRuler-wordHighlightStrongForeground: rgba(192, 160, 192, 0.8);
+            --vscode-peekViewTitle-background: #ffffff;
+            --vscode-peekViewTitleLabel-foreground: #333333;
+            --vscode-peekViewTitleDescription-foreground: rgba(97, 97, 97, 0.9);
+            --vscode-peekView-border: #007acc;
+            --vscode-peekViewResult-background: #f3f3f3;
+            --vscode-peekViewResult-lineForeground: #646465;
+            --vscode-peekViewResult-fileForeground: #1e1e1e;
+            --vscode-peekViewResult-selectionBackground: rgba(51, 153, 255, 0.2);
+            --vscode-peekViewResult-selectionForeground: #6c6c6c;
+            --vscode-peekViewEditor-background: #f2f8fc;
+            --vscode-peekViewEditorGutter-background: #f2f8fc;
+            --vscode-peekViewResult-matchHighlightBackground: rgba(234, 92, 0, 0.3);
+            --vscode-peekViewEditor-matchHighlightBackground: rgba(245, 216, 2, 0.87);
+            --vscode-editorMarkerNavigationError-background: #e51400;
+            --vscode-editorMarkerNavigationWarning-background: #e9a700;
+            --vscode-editorMarkerNavigationInfo-background: #75beff;
+            --vscode-editorMarkerNavigation-background: #ffffff;
+            --vscode-tab-activeBackground: #ffffff;
+            --vscode-tab-unfocusedActiveBackground: #ffffff;
+            --vscode-tab-inactiveBackground: #ececec;
+            --vscode-tab-unfocusedInactiveBackground: #ececec;
+            --vscode-tab-activeForeground: #333333;
+            --vscode-tab-inactiveForeground: rgba(51, 51, 51, 0.7);
+            --vscode-tab-unfocusedActiveForeground: rgba(51, 51, 51, 0.7);
+            --vscode-tab-unfocusedInactiveForeground: rgba(51, 51, 51, 0.35);
+            --vscode-tab-activeModifiedBorder: #33aaee;
+            --vscode-tab-inactiveModifiedBorder: rgba(51, 170, 238, 0.5);
+            --vscode-tab-unfocusedActiveModifiedBorder: rgba(51, 170, 238, 0.7);
+            --vscode-tab-unfocusedInactiveModifiedBorder: rgba(51, 170, 238, 0.25);
+            --vscode-tab-border: #f3f3f3;
+            --vscode-editorPane-background: #ffffff;
+            --vscode-editorGroupHeader-tabsBackground: #f3f3f3;
+            --vscode-editorGroupHeader-noTabsBackground: #ffffff;
+            --vscode-editorGroup-border: #e7e7e7;
+            --vscode-editorGroup-dropBackground: rgba(38, 119, 203, 0.18);
+            --vscode-imagePreview-border: rgba(128, 128, 128, 0.35);
+            --vscode-panel-background: #ffffff;
+            --vscode-panel-border: rgba(128, 128, 128, 0.35);
+            --vscode-panelTitle-activeForeground: #424242;
+            --vscode-panelTitle-inactiveForeground: rgba(66, 66, 66, 0.75);
+            --vscode-panelTitle-activeBorder: #424242;
+            --vscode-panelInput-border: #dddddd;
+            --vscode-panel-dropBorder: #424242;
+            --vscode-panelSection-dropBackground: rgba(38, 119, 203, 0.18);
+            --vscode-panelSectionHeader-background: rgba(128, 128, 128, 0.2);
+            --vscode-panelSection-border: rgba(128, 128, 128, 0.35);
+            --vscode-statusBar-foreground: #ffffff;
+            --vscode-statusBar-noFolderForeground: #ffffff;
+            --vscode-statusBar-background: #007acc;
+            --vscode-statusBar-noFolderBackground: #68217a;
+            --vscode-statusBarItem-activeBackground: rgba(255, 255, 255, 0.18);
+            --vscode-statusBarItem-hoverBackground: rgba(255, 255, 255, 0.12);
+            --vscode-statusBarItem-prominentForeground: #ffffff;
+            --vscode-statusBarItem-prominentBackground: rgba(0, 0, 0, 0.5);
+            --vscode-statusBarItem-prominentHoverBackground: rgba(0, 0, 0, 0.3);
+            --vscode-activityBar-background: #2c2c2c;
+            --vscode-activityBar-foreground: #ffffff;
+            --vscode-activityBar-inactiveForeground: rgba(255, 255, 255, 0.4);
+            --vscode-activityBar-activeBorder: #ffffff;
+            --vscode-activityBar-dropBorder: #ffffff;
+            --vscode-activityBarBadge-background: #007acc;
+            --vscode-activityBarBadge-foreground: #ffffff;
+            --vscode-statusBarItem-remoteBackground: #16825d;
+            --vscode-statusBarItem-remoteForeground: #ffffff;
+            --vscode-extensionBadge-remoteBackground: #007acc;
+            --vscode-extensionBadge-remoteForeground: #ffffff;
+            --vscode-sideBar-background: #f3f3f3;
+            --vscode-sideBarTitle-foreground: #6f6f6f;
+            --vscode-sideBar-dropBackground: rgba(38, 119, 203, 0.18);
+            --vscode-sideBarSectionHeader-background: rgba(0, 0, 0, 0);
+            --vscode-sideBarSectionHeader-border: rgba(97, 97, 97, 0.19);
+            --vscode-titleBar-activeForeground: #333333;
+            --vscode-titleBar-inactiveForeground: rgba(51, 51, 51, 0.6);
+            --vscode-titleBar-activeBackground: #dddddd;
+            --vscode-titleBar-inactiveBackground: rgba(221, 221, 221, 0.6);
+            --vscode-menubar-selectionForeground: #333333;
+            --vscode-menubar-selectionBackground: rgba(0, 0, 0, 0.1);
+            --vscode-notifications-foreground: #616161;
+            --vscode-notifications-background: #f3f3f3;
+            --vscode-notificationLink-foreground: #006ab1;
+            --vscode-notificationCenterHeader-background: #e7e7e7;
+            --vscode-notifications-border: #e7e7e7;
+            --vscode-notificationsErrorIcon-foreground: #e51400;
+            --vscode-notificationsWarningIcon-foreground: #e9a700;
+            --vscode-notificationsInfoIcon-foreground: #75beff;
+            --vscode-editorGutter-commentRangeForeground: #c5c5c5;
+            --vscode-editor-stackFrameHighlightBackground: rgba(255, 255, 102, 0.45);
+            --vscode-editor-focusedStackFrameHighlightBackground: rgba(206, 231, 206, 0.45);
+            --vscode-terminal-foreground: #333333;
+            --vscode-terminal-selectionBackground: rgba(0, 0, 0, 0.25);
+            --vscode-terminal-border: rgba(128, 128, 128, 0.35);
+            --vscode-statusBar-debuggingBackground: #cc6633;
+            --vscode-statusBar-debuggingForeground: #ffffff;
+            --vscode-settings-headerForeground: #444444;
+            --vscode-settings-modifiedItemIndicator: #66afe0;
+            --vscode-settings-dropdownBackground: #ffffff;
+            --vscode-settings-dropdownBorder: #cecece;
+            --vscode-settings-dropdownListBorder: #c8c8c8;
+            --vscode-settings-checkboxBackground: #ffffff;
+            --vscode-settings-checkboxBorder: #cecece;
+            --vscode-settings-textInputBackground: #ffffff;
+            --vscode-settings-textInputForeground: #616161;
+            --vscode-settings-textInputBorder: #cecece;
+            --vscode-settings-numberInputBackground: #ffffff;
+            --vscode-settings-numberInputForeground: #616161;
+            --vscode-settings-numberInputBorder: #cecece;
+            --vscode-debugExceptionWidget-border: #a31515;
+            --vscode-debugExceptionWidget-background: #f1dfde;
+            --vscode-editorGutter-modifiedBackground: #66afe0;
+            --vscode-editorGutter-addedBackground: #81b88b;
+            --vscode-editorGutter-deletedBackground: #ca4b51;
+            --vscode-minimapGutter-modifiedBackground: #66afe0;
+            --vscode-minimapGutter-addedBackground: #81b88b;
+            --vscode-minimapGutter-deletedBackground: #ca4b51;
+            --vscode-editorOverviewRuler-modifiedForeground: rgba(102, 175, 224, 0.6);
+            --vscode-editorOverviewRuler-addedForeground: rgba(129, 184, 139, 0.6);
+            --vscode-editorOverviewRuler-deletedForeground: rgba(202, 75, 81, 0.6);
+            --vscode-searchEditor-textInputBorder: #cecece;
+            --vscode-debugIcon-breakpointForeground: #e51400;
+            --vscode-debugIcon-breakpointDisabledForeground: #848484;
+            --vscode-debugIcon-breakpointUnverifiedForeground: #848484;
+            --vscode-debugIcon-breakpointCurrentStackframeForeground: #ffcc00;
+            --vscode-debugIcon-breakpointStackframeForeground: #89d185;
+            --vscode-debugToolBar-background: #f3f3f3;
+            --vscode-debugIcon-startForeground: #388a34;
+            --vscode-debugIcon-pauseForeground: #007acc;
+            --vscode-debugIcon-stopForeground: #a1260d;
+            --vscode-debugIcon-disconnectForeground: #a1260d;
+            --vscode-debugIcon-restartForeground: #388a34;
+            --vscode-debugIcon-stepOverForeground: #007acc;
+            --vscode-debugIcon-stepIntoForeground: #007acc;
+            --vscode-debugIcon-stepOutForeground: #007acc;
+            --vscode-debugIcon-continueForeground: #007acc;
+            --vscode-debugIcon-stepBackForeground: #007acc;
+            --vscode-debugTokenExpression-name: #9b46b0;
+            --vscode-debugTokenExpression-value: rgba(108, 108, 108, 0.8);
+            --vscode-debugTokenExpression-string: #a31515;
+            --vscode-debugTokenExpression-boolean: #0000ff;
+            --vscode-debugTokenExpression-number: #098658;
+            --vscode-debugTokenExpression-error: #e51400;
+            --vscode-debugView-exceptionLabelForeground: #ffffff;
+            --vscode-debugView-exceptionLabelBackground: #a31515;
+            --vscode-debugView-stateLabelForeground: #616161;
+            --vscode-debugView-stateLabelBackground: rgba(136, 136, 136, 0.27);
+            --vscode-debugView-valueChangedHighlight: #569cd6;
+            --vscode-debugConsole-infoForeground: #75beff;
+            --vscode-debugConsole-warningForeground: #e9a700;
+            --vscode-debugConsole-errorForeground: #a1260d;
+            --vscode-debugConsole-sourceForeground: #616161;
+            --vscode-debugConsoleInputIcon-foreground: #616161;
+            --vscode-extensionButton-prominentBackground: #327e36;
+            --vscode-extensionButton-prominentForeground: #ffffff;
+            --vscode-extensionButton-prominentHoverBackground: #28632b;
+            --vscode-notebook-cellBorderColor: #dae3e9;
+            --vscode-notebook-focusedEditorBorder: #0090f1;
+            --vscode-notebookStatusSuccessIcon-foreground: #388a34;
+            --vscode-notebookStatusErrorIcon-foreground: #a1260d;
+            --vscode-notebookStatusRunningIcon-foreground: #616161;
+            --vscode-notebook-outputContainerBackgroundColor: rgba(200, 221, 241, 0.31);
+            --vscode-notebook-cellToolbarSeparator: rgba(128, 128, 128, 0.35);
+            --vscode-notebook-focusedCellBackground: rgba(200, 221, 241, 0.31);
+            --vscode-notebook-cellHoverBackground: rgba(200, 221, 241, 0.22);
+            --vscode-notebook-focusedCellBorder: rgba(0, 0, 0, 0.12);
+            --vscode-notebook-cellStatusBarItemHoverBackground: rgba(0, 0, 0, 0.08);
+            --vscode-notebook-cellInsertionIndicator: #0090f1;
+            --vscode-notebookScrollbarSlider-background: rgba(100, 100, 100, 0.4);
+            --vscode-notebookScrollbarSlider-hoverBackground: rgba(100, 100, 100, 0.7);
+            --vscode-notebookScrollbarSlider-activeBackground: rgba(0, 0, 0, 0.6);
+            --vscode-notebook-symbolHighlightBackground: rgba(253, 255, 0, 0.2);
+            --vscode-scm-providerBorder: #c8c8c8;
+            --vscode-terminal-ansiBlack: #000000;
+            --vscode-terminal-ansiRed: #cd3131;
+            --vscode-terminal-ansiGreen: #00bc00;
+            --vscode-terminal-ansiYellow: #949800;
+            --vscode-terminal-ansiBlue: #0451a5;
+            --vscode-terminal-ansiMagenta: #bc05bc;
+            --vscode-terminal-ansiCyan: #0598bc;
+            --vscode-terminal-ansiWhite: #555555;
+            --vscode-terminal-ansiBrightBlack: #666666;
+            --vscode-terminal-ansiBrightRed: #cd3131;
+            --vscode-terminal-ansiBrightGreen: #14ce14;
+            --vscode-terminal-ansiBrightYellow: #b5ba00;
+            --vscode-terminal-ansiBrightBlue: #0451a5;
+            --vscode-terminal-ansiBrightMagenta: #bc05bc;
+            --vscode-terminal-ansiBrightCyan: #0598bc;
+            --vscode-terminal-ansiBrightWhite: #a5a5a5;
+            --vscode-gitDecoration-addedResourceForeground: #587c0c;
+            --vscode-gitDecoration-modifiedResourceForeground: #895503;
+            --vscode-gitDecoration-deletedResourceForeground: #ad0707;
+            --vscode-gitDecoration-untrackedResourceForeground: #007100;
+            --vscode-gitDecoration-ignoredResourceForeground: #8e8e90;
+            --vscode-gitDecoration-conflictingResourceForeground: #6c6cc4;
+            --vscode-gitDecoration-submoduleResourceForeground: #1258a7;
+            --vscode-gitlens-gutterBackgroundColor: rgba(0, 0, 0, 0.05);
+            --vscode-gitlens-gutterForegroundColor: #747474;
+            --vscode-gitlens-gutterUncommittedForegroundColor: rgba(0, 188, 242, 0.6);
+            --vscode-gitlens-trailingLineBackgroundColor: rgba(0, 0, 0, 0);
+            --vscode-gitlens-trailingLineForegroundColor: rgba(153, 153, 153, 0.35);
+            --vscode-gitlens-lineHighlightBackgroundColor: rgba(0, 188, 242, 0.2);
+            --vscode-gitlens-lineHighlightOverviewRulerColor: rgba(0, 188, 242, 0.6);
+            --vscode-issues-newIssueDecoration: rgba(0, 0, 0, 0.28);
+        }
+
+        body {
+            background-color: var(--vscode-editor-background);
+            color: var(--vscode-editor-foreground);
+            font-family: var(--vscode-font-family);
+            font-weight: var(--vscode-font-weight);
+            font-size: var(--vscode-font-size);
+            margin: 0;
+            padding: 0 20px;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        a {
+            color: var(--vscode-textLink-foreground);
+        }
+
+        a:hover {
+            color: var(--vscode-textLink-activeForeground);
+        }
+
+        a:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 1px solid -webkit-focus-ring-color;
+            outline-offset: -1px;
+        }
+
+        code {
+            color: var(--vscode-textPreformat-foreground);
+        }
+
+        blockquote {
+            background: var(--vscode-textBlockQuote-background);
+            border-color: var(--vscode-textBlockQuote-border);
+        }
+
+        kbd {
+            color: var(--vscode-editor-foreground);
+            border-radius: 3px;
+            vertical-align: middle;
+            padding: 1px 3px;
+
+            background-color: hsla(0, 0%, 50%, .17);
+            border: 1px solid rgba(71, 71, 71, .4);
+            border-bottom-color: rgba(88, 88, 88, .4);
+            box-shadow: inset 0 -1px 0 rgba(88, 88, 88, .4);
+        }
+
+        .vscode-light kbd {
+            background-color: hsla(0, 0%, 87%, .5);
+            border: 1px solid hsla(0, 0%, 80%, .7);
+            border-bottom-color: hsla(0, 0%, 73%, .7);
+            box-shadow: inset 0 -1px 0 hsla(0, 0%, 73%, .7);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background-color: var(--vscode-editor-background);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--vscode-scrollbarSlider-background);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--vscode-scrollbarSlider-hoverBackground);
+        }
+
+        ::-webkit-scrollbar-thumb:active {
+            background-color: var(--vscode-scrollbarSlider-activeBackground);
+        }
+
+        .emoji {
+            height: 20px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+
+        .page-break {
+            display: block;
+            page-break-after: always;
+        }
+
+        .no-page-break {
+            page-break-inside: avoid;
+        }
+    </style>
+    <style>
+        /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+        html,
+        body {
+            font-family: "Fira Code", "Source Code Pro", "Consolas", "Inconsolata", "Droid Sans Mono", "Monaco", monospace;
+            font-size: 17px;
+            padding: 0 130px;
+            line-height: var(--markdown-line-height, 22px);
+            word-wrap: break-word;
+            background: linear-gradient(to bottom, #300d52, #441b49);
+        }
+
+        body {
+            padding-top: 2em;
+        }
+
+        /* Reset margin top for elements */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        ol,
+        ul,
+        pre {
+            margin-top: 0;
+            color: rgb(212, 212, 212);
+        }
+
+        a {
+            color: #5add84;
+        }
+
+        .e,
+        strong {
+            color: #83ddd4;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            border-radius: 100%;
+            background: #f68eff;
+            padding: 0.5rem;
+            border: none;
+            cursor: pointer;
+            opacity: 100%;
+            transition: opacity 0.5s;
+        }
+
+        .hidden {
+            opacity: 0%;
+        }
+
+        .back-to-top-icon {
+            width: 2.6rem;
+            height: 2.6rem;
+            color: #000000;
+        }
+
+        .progress-bar {
+            height: 0.5rem;
+            background: #5add84;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: normal;
+            margin-bottom: 0.2em;
+        }
+
+        #code-csp-warning {
+            position: fixed;
+            top: 0;
+            right: 0;
+            color: white;
+            margin: 16px;
+            text-align: center;
+            font-size: 12px;
+            font-family: sans-serif;
+            background-color: #444444;
+            cursor: pointer;
+            padding: 6px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+        }
+
+        #code-csp-warning:hover {
+            text-decoration: none;
+            background-color: #007acc;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
+        }
+
+        body.scrollBeyondLastLine {
+            margin-bottom: calc(100vh - 22px);
+        }
+
+        h2 {
+            color: rgba(255, 221, 111, 0.788)
+        }
+
+        ul ul,
+        ul ol,
+        ol ul,
+        ol ol {
+            margin-bottom: 0;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 1px solid -webkit-focus-ring-color;
+            outline-offset: -1px;
+        }
+
+        p {
+            margin-bottom: 0.7em;
+        }
+
+        ul,
+        ol {
+            margin-bottom: 0.7em;
+        }
+
+        hr {
+            border: 0;
+            height: 2px;
+            border-bottom: 2px solid;
+        }
+
+        h1 {
+            padding-bottom: 0.3em;
+            line-height: 1.2;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            font-weight: normal;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-bottom: 0.7em;
+        }
+
+        th {
+            text-align: left;
+            border-bottom: 1px solid;
+        }
+
+        th,
+        td {
+            padding: 5px 10px;
+        }
+
+        table>tbody>tr+tr>td {
+            border-top: 1px solid;
+        }
+
+        blockquote {
+            margin: 0 7px 0 5px;
+            padding: 0 16px 0 10px;
+            border-left-width: 5px;
+            border-left-style: solid;
+        }
+
+        code {
+            font-family: var(--vscode-editor-font-family, "SF Mono", Monaco, Menlo, Consolas, "Ubuntu Mono", "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace);
+            font-size: 1em;
+            line-height: 1.357em;
+        }
+
+        body.wordWrap pre {
+            white-space: pre-wrap;
+        }
+
+        pre:not(.hljs),
+        pre.hljs code>div {
+            padding: 16px;
+            border-radius: 3px;
+            overflow: auto;
+        }
+
+        pre code {
+            color: var(--vscode-editor-foreground);
+            tab-size: 4;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1 data-line="0" class="code-line" dir="auto" id="mega-project-list" tabindex="-1">Mega Project List</h1>
+    <p data-line="3" class="code-line" dir="auto">A list of practical projects that anyone can solve in any programming
+        language (See <a href="https://github.com/thekarangoel/Projects-Solutions"
+            data-href="https://github.com/thekarangoel/Projects-Solutions">solutions</a>). These projects are divided in
+        multiple categories, and each category has its own folder.</p>
+    <p data-line="5" class="code-line" dir="auto">To get started, simply fork this repo.</p>
+    <h2 data-line="7" class="code-line" dir="auto" id="contributing" tabindex="-1"><a
+            href="https://github.com/thekarangoel/Projects/blob/master/CONTRIBUTING.md"
+            data-href="https://github.com/thekarangoel/Projects/blob/master/CONTRIBUTING.md">CONTRIBUTING</a></h2>
+    <p data-line="9" class="code-line" dir="auto">See ways of <a
+            href="https://github.com/thekarangoel/Projects/blob/master/CONTRIBUTING.md"
+            data-href="https://github.com/thekarangoel/Projects/blob/master/CONTRIBUTING.md">contributing</a> to this
+        repo.
+        You can contribute <strong>solutions</strong> (will be published in this <a
+            href="https://github.com/thekarangoel/Projects-Solutions"
+            data-href="https://github.com/thekarangoel/Projects-Solutions">repo</a>) to existing problems, <strong>add
+            new
+            projects</strong> or remove existing ones. Make sure you follow all instructions properly.</p>
+    <h2 data-line="12" class="code-line" dir="auto" id="solutions" tabindex="-1"><a
+            href="https://github.com/thekarangoel/Projects-Solutions"
+            data-href="https://github.com/thekarangoel/Projects-Solutions">Solutions</a></h2>
+    <p data-line="14" class="code-line" dir="auto">You can find implementations of these projects in many other
+        languages
+        by other users in <a href="https://github.com/thekarangoel/Projects-Solutions"
+            data-href="https://github.com/thekarangoel/Projects-Solutions">this repo</a>.</p>
+    <h2 data-line="16" class="code-line" dir="auto" id="credits" tabindex="-1">Credits</h2>
+    <p data-line="18" class="code-line" dir="auto">This repo was compiled by <a href="http://twitter.com/karangoel"
+            data-href="http://twitter.com/karangoel">Karan Goel</a>.</p>
+    <p data-line="20" class="code-line" dir="auto">Problems are motivated by the ones shared at:</p>
+    <ul data-line="22" class="code-line" dir="auto">
+        <li data-line="22" class="code-line" dir="auto"><a
+                href="http://www.dreamincode.net/forums/topic/78802-martyr2s-mega-project-ideas-list/"
+                data-href="http://www.dreamincode.net/forums/topic/78802-martyr2s-mega-project-ideas-list/">Martyr2’s
+                Mega
+                Project List</a></li>
+        <li data-line="23" class="code-line" dir="auto"><a href="http://rosettacode.org/"
+                data-href="http://rosettacode.org/">Rosetta Code</a></li>
+    </ul>
+    <h2 data-line="25" class="code-line" dir="auto" id="table-of-contents" tabindex="-1">Table of Contents</h2>
+    <ul data-line="27" class="code-line" dir="auto">
+        <li data-line="27" class="code-line" dir="auto"><a href="#numbers" data-href="#numbers">Numbers</a></li>
+        <li data-line="28" class="code-line" dir="auto"><a href="#classic-algorithms"
+                data-href="#classic-algorithms">Classic Algorithms</a></li>
+        <li data-line="29" class="code-line" dir="auto"><a href="#graph" data-href="#graph">Graph</a></li>
+        <li data-line="30" class="code-line" dir="auto"><a href="#data-structures" data-href="#data-structures">Data
+                Structures</a></li>
+        <li data-line="31" class="code-line" dir="auto"><a href="#text" data-href="#text">Text</a></li>
+        <li data-line="32" class="code-line" dir="auto"><a href="#networking" data-href="#networking">Networking</a>
+        </li>
+        <li data-line="33" class="code-line" dir="auto"><a href="#classes" data-href="#classes">Classes</a></li>
+        <li data-line="34" class="code-line" dir="auto"><a href="#threading" data-href="#threading">Threading</a></li>
+        <li data-line="35" class="code-line" dir="auto"><a href="#web" data-href="#web">Web</a></li>
+        <li data-line="36" class="code-line" dir="auto"><a href="#files" data-href="#files">Files</a></li>
+        <li data-line="37" class="code-line" dir="auto"><a href="#databases" data-href="#databases">Databases</a></li>
+        <li data-line="38" class="code-line" dir="auto"><a href="#graphics-and-multimedia"
+                data-href="#graphics-and-multimedia">Graphics and Multimedia</a></li>
+        <li data-line="39" class="code-line" dir="auto"><a href="#security" data-href="#security">Security</a></li>
+    </ul>
+    <h2 data-line="41" class="code-line" dir="auto" id="numbers" tabindex="-1">Numbers</h2>
+    <p data-line="44" class="code-line" dir="auto"><strong><span class="e">Find PI to the Nth Digit</span></strong> -
+        Enter a number and have the
+        program generate PI up to that many decimal places. Keep a limit to how far the program will go.</p>
+    <p data-line="46" class="code-line" dir="auto"><strong>Find e to the Nth Digit</strong> - Just like the previous
+        problem, but with e instead of PI. Enter a number and have the program generate e up to that many decimal
+        places.
+        Keep a limit to how far the program will go.</p>
+    <p data-line="48" class="code-line" dir="auto"><strong>Fibonacci Sequence</strong> - Enter a number and have the
+        program generate the Fibonacci sequence to that number or to the Nth number.</p>
+    <p data-line="50" class="code-line" dir="auto"><strong>Prime Factorization</strong> - Have the user enter a number
+        and
+        find all Prime Factors (if there are any) and display them.</p>
+    <p data-line="52" class="code-line" dir="auto"><strong>Next Prime Number</strong> - Have the program find prime
+        numbers until the user chooses to stop asking for the next one.</p>
+    <p data-line="54" class="code-line" dir="auto"><strong>Find Cost of Tile to Cover W x H Floor</strong> - Calculate
+        the
+        total cost of tile it would take to cover a floor plan of width and height, using a cost entered by the user.
+    </p>
+    <p data-line="56" class="code-line" dir="auto"><strong>Mortgage Calculator</strong> - Calculate the monthly payments
+        of a fixed term mortgage over given Nth terms at a given interest rate. Also figure out how long it will take
+        the
+        user to pay back the loan. For added complexity, add an option for users to select the compounding interval
+        (Monthly, Weekly, Daily, Continually).</p>
+    <p data-line="58" class="code-line" dir="auto"><strong>Change Return Program</strong> - The user enters a cost and
+        then the amount of money given. The program will figure out the change and the number of quarters, dimes,
+        nickels,
+        pennies needed for the change.</p>
+    <p data-line="60" class="code-line" dir="auto"><strong>Binary to Decimal and Back Converter</strong> - Develop a
+        converter to convert a decimal number to binary or a binary number to its decimal equivalent.</p>
+    <p data-line="62" class="code-line" dir="auto"><strong>Calculator</strong> - A simple calculator to do basic
+        operators. Make it a scientific calculator for added complexity.</p>
+    <p data-line="64" class="code-line" dir="auto"><strong>Unit Converter (temp, currency, volume, mass and
+            more)</strong>
+        - Converts various units between one another. The user enters the type of unit being entered, the type of unit
+        they
+        want to convert to and then the value. The program will then make the conversion.</p>
+    <p data-line="66" class="code-line" dir="auto"><strong>Alarm Clock</strong> - A simple clock where it plays a sound
+        after X number of minutes/seconds or at a particular time.</p>
+    <p data-line="68" class="code-line" dir="auto"><strong>Distance Between Two Cities</strong> - Calculates the
+        distance
+        between two cities and allows the user to specify a unit of distance. This program may require finding
+        coordinates
+        for the cities like latitude and longitude.</p>
+    <p data-line="70" class="code-line" dir="auto"><strong>Credit Card Validator</strong> - Takes in a credit card
+        number
+        from a common credit card vendor (Visa, MasterCard, American Express, Discoverer) and validates it to make sure
+        that
+        it is a valid number (look into how credit cards use a checksum).</p>
+    <p data-line="72" class="code-line" dir="auto"><strong>Tax Calculator</strong> - Asks the user to enter a cost and
+        either a country or state tax. It then returns the tax plus the total cost with tax.</p>
+    <p data-line="74" class="code-line" dir="auto"><strong>Factorial Finder</strong> - The Factorial of a positive
+        integer, n, is defined as the product of the sequence n, n-1, n-2, ...1 and the factorial of zero, 0, is defined
+        as
+        being 1. Solve this using both loops and recursion.</p>
+    <p data-line="76" class="code-line" dir="auto"><strong>Complex Number Algebra</strong> - Show addition,
+        multiplication, negation, and inversion of complex numbers in separate functions. (Subtraction and division
+        operations can be made with pairs of these operations.) Print the results for each operation tested.</p>
+    <p data-line="78" class="code-line" dir="auto"><strong>Happy Numbers</strong> - A happy number is defined by the
+        following process. Starting with any positive integer, replace the number by the sum of the squares of its
+        digits,
+        and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which
+        does
+        not include 1. Those numbers for which this process ends in 1 are happy numbers, while those that do not end in
+        1
+        are unhappy numbers. Display an example of your output here. Find first 8 happy numbers.</p>
+    <p data-line="80" class="code-line" dir="auto"><strong>Number Names</strong> - Show how to spell out a number in
+        English. You can use a preexisting implementation or roll your own, but you should support inputs up to at least
+        one
+        million (or the maximum value of your language's default bounded integer type, if that's less). <em>Optional:
+            Support for inputs other than positive integers (like zero, negative integers, and floating-point
+            numbers).</em>
+    </p>
+    <p data-line="82" class="code-line" dir="auto"><strong>Coin Flip Simulation</strong> - Write some code that
+        simulates
+        flipping a single coin however many times the user decides. The code should record the outcomes and count the
+        number
+        of tails and heads.</p>
+    <p data-line="84" class="code-line" dir="auto"><strong>Limit Calculator</strong> - Ask the user to enter f(x) and
+        the
+        limit value, then return the value of the limit statement <em>Optional: Make the calculator capable of
+            supporting
+            infinite limits.</em></p>
+    <p data-line="86" class="code-line" dir="auto"><strong>Fast Exponentiation</strong> - Ask the user to enter 2
+        integers
+        a and b and output a^b (i.e. pow(a,b)) in O(lg n) time complexity.</p>
+    <h2 data-line="88" class="code-line" dir="auto" id="classic-algorithms" tabindex="-1">Classic Algorithms</h2>
+    <p data-line="91" class="code-line" dir="auto"><strong>Collatz Conjecture</strong> - Start with a number <em>n &gt;
+            1</em>. Find the number of steps it takes to reach one using the following process: If <em>n</em> is even,
+        divide
+        it by 2. If <em>n</em> is odd, multiply it by 3 and add 1.</p>
+    <p data-line="93" class="code-line" dir="auto"><strong>Sorting</strong> - Implement two types of sorting algorithms:
+        Merge sort and bubble sort.</p>
+    <p data-line="95" class="code-line" dir="auto"><strong>Closest pair problem</strong> - The closest pair of points
+        problem or closest pair problem is a problem of computational geometry: given <em>n</em> points in metric space,
+        find a pair of points with the smallest distance between them.</p>
+    <p data-line="97" class="code-line" dir="auto"><strong>Sieve of Eratosthenes</strong> - The sieve of Eratosthenes is
+        one of the most efficient ways to find all of the smaller primes (below 10 million or so).</p>
+    <h2 data-line="100" class="code-line" dir="auto" id="graph" tabindex="-1">Graph</h2>
+    <p data-line="103" class="code-line" dir="auto"><strong>Graph from links</strong> - Create a program that will
+        create
+        a graph or network from a series of links.</p>
+    <p data-line="105" class="code-line" dir="auto"><strong>Eulerian Path</strong> - Create a program which will take as
+        an input a graph and output either a Eulerian path or a Eulerian cycle, or state that it is not possible. A
+        Eulerian
+        Path starts at one node and traverses every edge of a graph through every node and finishes at another node. A
+        Eulerian cycle is a eulerian Path that starts and finishes at the same node.</p>
+    <p data-line="107" class="code-line" dir="auto"><strong>Connected Graph</strong> - Create a program which takes a
+        graph as an input and outputs whether every node is connected or not.</p>
+    <p data-line="109" class="code-line" dir="auto"><strong>Dijkstra’s Algorithm</strong> - Create a program that finds
+        the shortest path through a graph using its edges.</p>
+    <p data-line="111" class="code-line" dir="auto"><strong>Minimum Spanning Tree</strong> - Create a program which
+        takes
+        a connected, undirected graph with weights and outputs the minimum spanning tree of the graph i.e., a
+        subgraph that is a tree, contains all the vertices, and the sum of its weights is the least possible.</p>
+    <h2 data-line="115" class="code-line" dir="auto" id="data-structures" tabindex="-1">Data Structures</h2>
+    <p data-line="118" class="code-line" dir="auto"><strong>Inverted index</strong> - An <a
+            href="http://en.wikipedia.org/wiki/Inverted_index"
+            data-href="http://en.wikipedia.org/wiki/Inverted_index">Inverted Index</a> is a data structure used to
+        create full
+        text search. Given a set of text files, implement a program to create an inverted index. Also create a user
+        interface to do a search using that inverted index which returns a list of files that contain the query term /
+        terms. The search index can be in memory.</p>
+    <h2 data-line="121" class="code-line" dir="auto" id="text" tabindex="-1">Text</h2>
+    <p data-line="124" class="code-line" dir="auto"><strong>Fizz Buzz</strong> - Write a program that prints the numbers
+        from 1 to 100. But for multiples of three print “Fizz” instead of the number and for the multiples of five print
+        “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz”.</p>
+    <p data-line="126" class="code-line" dir="auto"><strong>Reverse a String</strong> - Enter a string and the program
+        will reverse it and print it out.</p>
+    <p data-line="128" class="code-line" dir="auto"><strong>Pig Latin</strong> - Pig Latin is a game of alterations
+        played
+        on the English language game. To create the Pig Latin form of an English word the initial consonant sound is
+        transposed to the end of the word and an ay is affixed (Ex.: "banana" would yield anana-bay). Read Wikipedia for
+        more information on rules.</p>
+    <p data-line="130" class="code-line" dir="auto"><strong>Count Vowels</strong> - Enter a string and the program
+        counts
+        the number of vowels in the text. For added complexity have it report a sum of each vowel found.</p>
+    <p data-line="132" class="code-line" dir="auto"><strong>Check if Palindrome</strong> - Checks if the string entered
+        by
+        the user is a palindrome. That is that it reads the same forwards as backwards like “racecar”</p>
+    <p data-line="134" class="code-line" dir="auto"><strong>Count Words in a String</strong> - Counts the number of
+        individual words in a string. For added complexity read these strings in from a text file and generate a
+        summary.
+    </p>
+    <p data-line="136" class="code-line" dir="auto"><strong>Text Editor</strong> - Notepad style application that can
+        open, edit, and save text documents. <em>Optional: Add syntax highlighting and other features.</em></p>
+    <p data-line="138" class="code-line" dir="auto"><strong>RSS Feed Creator</strong> - Given a link to RSS/Atom Feed,
+        get
+        all posts and display them.</p>
+    <p data-line="140" class="code-line" dir="auto"><strong>Quote Tracker (market symbols etc)</strong> - A program
+        which
+        can go out and check the current value of stocks for a list of symbols entered by the user. The user can set how
+        often the stocks are checked. For CLI, show whether the stock has moved up or down. <em>Optional: If GUI, the
+            program can show green up and red down arrows to show which direction the stock value has moved.</em></p>
+    <p data-line="142" class="code-line" dir="auto"><strong>Guestbook / Journal</strong> - A simple application that
+        allows people to add comments or write journal entries. It can allow comments or not and timestamps for all
+        entries.
+        Could also be made into a shout box. <em>Optional: Deploy it on Google App Engine or Heroku or any other PaaS
+            (if
+            possible, of course).</em></p>
+    <p data-line="144" class="code-line" dir="auto"><strong>Vigenere / Vernam / Ceasar Ciphers</strong> - Functions for
+        encrypting and decrypting data messages. Then send them to a friend.</p>
+    <p data-line="146" class="code-line" dir="auto"><strong>Regex Query Tool</strong> - A tool that allows the user to
+        enter a text string and then in a separate control enter a regex pattern. It will run the regular expression
+        against
+        the source text and return any matches or flag errors in the regular expression.</p>
+    <h2 data-line="149" class="code-line" dir="auto" id="networking" tabindex="-1">Networking</h2>
+    <p data-line="152" class="code-line" dir="auto"><strong>FTP Program</strong> - A file transfer program which can
+        transfer files back and forth from a remote web sever.</p>
+    <p data-line="154" class="code-line" dir="auto"><strong>Bandwidth Monitor</strong> - A small utility program that
+        tracks how much data you have uploaded and downloaded from the net during the course of your current online
+        session.
+        See if you can find out what periods of the day you use more and less and generate a report or graph that shows
+        it.
+    </p>
+    <p data-line="156" class="code-line" dir="auto"><strong>Port Scanner</strong> - Enter an IP address and a port range
+        where the program will then attempt to find open ports on the given computer by connecting to each of them. On
+        any
+        successful connections mark the port as open.</p>
+    <p data-line="158" class="code-line" dir="auto"><strong>Mail Checker (POP3 / IMAP)</strong> - The user enters
+        various
+        account information include web server and IP, protocol type (POP3 or IMAP) and the application will check for
+        email
+        at a given interval.</p>
+    <p data-line="160" class="code-line" dir="auto"><strong>Country from IP Lookup</strong> - Enter an IP address and
+        find
+        the country that IP is registered in. <em>Optional: Find the Ip automatically.</em></p>
+    <p data-line="162" class="code-line" dir="auto"><strong>Whois Search Tool</strong> - Enter an IP or host address and
+        have it look it up through whois and return the results to you.</p>
+    <p data-line="164" class="code-line" dir="auto"><strong>Site Checker with Time Scheduling</strong> - An application
+        that attempts to connect to a website or server every so many minutes or a given time and check if it is up. If
+        it
+        is down, it will notify you by email or by posting a notice on screen.</p>
+    <h2 data-line="167" class="code-line" dir="auto" id="classes" tabindex="-1">Classes</h2>
+    <p data-line="170" class="code-line" dir="auto"><strong>Product Inventory Project</strong> - Create an application
+        which manages an inventory of products. Create a product class which has a price, id, and quantity on hand. Then
+        create an <em>inventory</em> class which keeps track of various products and can sum up the inventory value.</p>
+    <p data-line="172" class="code-line" dir="auto"><strong>Airline / Hotel Reservation System</strong> - Create a
+        reservation system which books airline seats or hotel rooms. It charges various rates for particular sections of
+        the
+        plane or hotel. Example, first class is going to cost more than coach. Hotel rooms have penthouse suites which
+        cost
+        more. Keep track of when rooms will be available and can be scheduled.</p>
+    <p data-line="174" class="code-line" dir="auto"><strong>Company Manager</strong> - Create an hierarchy of classes -
+        abstract class Employee and subclasses HourlyEmployee, SalariedEmployee, Manager and Executive. Every one's pay
+        is
+        calculated differently, research a bit about it.
+        After you've established an employee hierarchy, create a Company class that allows you to manage the employees.
+        You
+        should be able to hire, fire and raise employees.</p>
+    <p data-line="177" class="code-line" dir="auto"><strong>Bank Account Manager</strong> - Create a class called
+        Account
+        which will be an abstract class for three other classes called CheckingAccount, SavingsAccount and
+        BusinessAccount.
+        Manage credits and debits from these accounts through an ATM style program.</p>
+    <p data-line="179" class="code-line" dir="auto"><strong>Patient / Doctor Scheduler</strong> - Create a patient class
+        and a doctor class. Have a doctor that can handle multiple patients and setup a scheduling program where a
+        doctor
+        can only handle 16 patients during an 8 hr work day.</p>
+    <p data-line="181" class="code-line" dir="auto"><strong>Recipe Creator and Manager</strong> - Create a recipe class
+        with ingredients and a put them in a recipe manager program that organizes them into categories like deserts,
+        main
+        courses or by ingredients like chicken, beef, soups, pies etc.</p>
+    <p data-line="183" class="code-line" dir="auto"><strong>Image Gallery</strong> - Create an image abstract class and
+        then a class that inherits from it for each image type. Put them in a program which displays them in a gallery
+        style
+        format for viewing.</p>
+    <p data-line="185" class="code-line" dir="auto"><strong>Shape Area and Perimeter Classes</strong> - Create an
+        abstract
+        class called Shape and then inherit from it other shapes like diamond, rectangle, circle, triangle etc. Then
+        have
+        each class override the area and perimeter functionality to handle each shape type.</p>
+    <p data-line="187" class="code-line" dir="auto"><strong>Flower Shop Ordering To Go</strong> - Create a flower shop
+        application which deals in flower objects and use those flower objects in a bouquet object which can then be
+        sold.
+        Keep track of the number of objects and when you may need to order more.</p>
+    <p data-line="189" class="code-line" dir="auto"><strong>Family Tree Creator</strong> - Create a class called Person
+        which will have a name, when they were born and when (and if) they died. Allow the user to create these Person
+        classes and put them into a family tree structure. Print out the tree to the screen.</p>
+    <h2 data-line="192" class="code-line" dir="auto" id="threading" tabindex="-1">Threading</h2>
+    <p data-line="195" class="code-line" dir="auto"><strong>Create A Progress Bar for Downloads</strong> - Create a
+        progress bar for applications that can keep track of a download in progress. The progress bar will be on a
+        separate
+        thread and will communicate with the main thread using delegates.</p>
+    <p data-line="197" class="code-line" dir="auto"><strong>Bulk Thumbnail Creator</strong> - Picture processing can
+        take
+        a bit of time for some transformations. Especially if the image is large. Create an image program which can take
+        hundreds of images and converts them to a specified size in the background thread while you do other things. For
+        added complexity, have one thread handling re-sizing, have another bulk renaming of thumbnails etc.</p>
+    <h2 data-line="200" class="code-line" dir="auto" id="web" tabindex="-1">Web</h2>
+    <p data-line="203" class="code-line" dir="auto"><strong>Page Scraper</strong> - Create an application which connects
+        to a site and pulls out all links, or images, and saves them to a list. <em>Optional: Organize the indexed
+            content
+            and don’t allow duplicates. Have it put the results into an easily searchable index file.</em></p>
+    <p data-line="205" class="code-line" dir="auto"><strong>Online White Board</strong> - Create an application which
+        allows you to draw pictures, write notes and use various colors to flesh out ideas for projects. <em>Optional:
+            Add
+            feature to invite friends to collaborate on a white board online.</em></p>
+    <p data-line="207" class="code-line" dir="auto"><strong>Get Atomic Time from Internet Clock</strong> - This program
+        will get the true atomic time from an atomic time clock on the Internet. Use any one of the atomic clocks
+        returned
+        by a simple Google search.</p>
+    <p data-line="209" class="code-line" dir="auto"><strong>Fetch Current Weather</strong> - Get the current weather for
+        a
+        given zip/postal code. <em>Optional: Try locating the user automatically.</em></p>
+    <p data-line="211" class="code-line" dir="auto"><strong>Scheduled Auto Login and Action</strong> - Make an
+        application
+        which logs into a given site on a schedule and invokes a certain action and then logs out. This can be useful
+        for
+        checking web mail, posting regular content, or getting info for other applications and saving it to your
+        computer.
+    </p>
+    <p data-line="213" class="code-line" dir="auto"><strong>E-Card Generator</strong> - Make a site that allows people
+        to
+        generate their own little e-cards and send them to other people. Do not use Flash. Use a picture library and
+        perhaps
+        insightful mottos or quotes.</p>
+    <p data-line="215" class="code-line" dir="auto"><strong>Content Management System</strong> - Create a content
+        management system (CMS) like Joomla, Drupal, PHP Nuke etc. Start small. <em>Optional: Allow for the addition of
+            modules/addons.</em></p>
+    <p data-line="217" class="code-line" dir="auto"><strong>Web Board (Forum)</strong> - Create a forum for you and your
+        buddies to post, administer and share thoughts and ideas.</p>
+    <p data-line="219" class="code-line" dir="auto"><strong>CAPTCHA Maker</strong> - Ever see those images with letters
+        a
+        numbers when you signup for a service and then asks you to enter what you see? It keeps web bots from
+        automatically
+        signing up and spamming. Try creating one yourself for online forms.</p>
+    <h2 data-line="222" class="code-line" dir="auto" id="files" tabindex="-1">Files</h2>
+    <p data-line="225" class="code-line" dir="auto"><strong>Quiz Maker</strong> - Make an application which takes
+        various
+        questions from a file, picked randomly, and puts together a quiz for students. Each quiz can be different and
+        then
+        reads a key to grade the quizzes.</p>
+    <p data-line="227" class="code-line" dir="auto"><strong>Sort Excel/CSV File Utility</strong> - Reads a file of
+        records, sorts them, and then writes them back to the file. Allow the user to choose various sort style and
+        sorting
+        based on a particular field.</p>
+    <p data-line="229" class="code-line" dir="auto"><strong>Create Zip File Maker</strong> - The user enters various
+        files
+        from different directories and the program zips them up into a zip file. <em>Optional: Apply actual compression
+            to
+            the files. Start with Huffman Algorithm.</em></p>
+    <p data-line="231" class="code-line" dir="auto"><strong>PDF Generator</strong> - An application which can read in a
+        text file, html file or some other file and generates a PDF file out of it. Great for a web based service where
+        the
+        user uploads the file and the program returns a PDF of the file. <em>Optional: Deploy on GAE or Heroku if
+            possible.</em></p>
+    <p data-line="233" class="code-line" dir="auto"><strong>Mp3 Tagger</strong> - Modify and add ID3v1 tags to MP3
+        files.
+        See if you can also add in the album art into the MP3 file’s header as well as other ID3v2 tags.</p>
+    <p data-line="235" class="code-line" dir="auto"><strong>Code Snippet Manager</strong> - Another utility program that
+        allows coders to put in functions, classes or other tidbits to save for use later. Organized by the type of
+        snippet
+        or language the coder can quickly look up code. <em>Optional: For extra practice try adding syntax highlighting
+            based on the language.</em></p>
+    <h2 data-line="238" class="code-line" dir="auto" id="databases" tabindex="-1">Databases</h2>
+    <p data-line="241" class="code-line" dir="auto"><strong>SQL Query Analyzer</strong> - A utility application which a
+        user can enter a query and have it run against a local database and look for ways to make it more efficient.</p>
+    <p data-line="243" class="code-line" dir="auto"><strong>Remote SQL Tool</strong> - A utility that can execute
+        queries
+        on remote servers from your local computer across the Internet. It should take in a remote host, user name and
+        password, run the query and return the results.</p>
+    <p data-line="245" class="code-line" dir="auto"><strong>Report Generator</strong> - Create a utility that generates
+        a
+        report based on some tables in a database. Generates a sales reports based on the order/order details tables or
+        sums
+        up the days current database activity.</p>
+    <p data-line="247" class="code-line" dir="auto"><strong>Event Scheduler and Calendar</strong> - Make an application
+        which allows the user to enter a date and time of an event, event notes and then schedule those events on a
+        calendar. The user can then browse the calendar or search the calendar for specific events. <em>Optional: Allow
+            the
+            application to create re-occurrence events that reoccur every day, week, month, year etc.</em></p>
+    <p data-line="249" class="code-line" dir="auto"><strong>Budget Tracker</strong> - Write an application that keeps
+        track of a household’s budget. The user can add expenses, income, and recurring costs to find out how much they
+        are
+        saving or losing over a period of time. <em>Optional: Allow the user to specify a date range and see the net
+            flow of
+            money in and out of the house budget for that time period.</em></p>
+    <p data-line="251" class="code-line" dir="auto"><strong>TV Show Tracker</strong> - Got a favorite show you don’t
+        want
+        to miss? Don’t have a PVR or want to be able to find the show to then PVR it later? Make an application which
+        can
+        search various online TV Guide sites, locate the shows/times/channels and add them to a database application.
+        The
+        database/website then can send you email reminders that a show is about to start and which channel it will be
+        on.
+    </p>
+    <p data-line="253" class="code-line" dir="auto"><strong>Travel Planner System</strong> - Make a system that allows
+        users to put together their own little travel itinerary and keep track of the airline / hotel arrangements,
+        points
+        of interest, budget and schedule.</p>
+    <h2 data-line="256" class="code-line" dir="auto" id="graphics-and-multimedia" tabindex="-1">Graphics and Multimedia
+    </h2>
+    <p data-line="259" class="code-line" dir="auto"><strong>Slide Show</strong> - Make an application that shows various
+        pictures in a slide show format. <em>Optional: Try adding various effects like fade in/out, star wipe and window
+            blinds transitions.</em></p>
+    <p data-line="261" class="code-line" dir="auto"><strong>Stream Video from Online</strong> - Try to create your own
+        online streaming video player.</p>
+    <p data-line="263" class="code-line" dir="auto"><strong>Mp3 Player</strong> - A simple program for playing your
+        favorite music files. Add features you think are missing from your favorite music player.</p>
+    <p data-line="265" class="code-line" dir="auto"><strong>Watermarking Application</strong> - Have some pictures you
+        want copyright protected? Add your own logo or text lightly across the background so that no one can simply
+        steal
+        your graphics off your site. Make a program that will add this watermark to the picture. <em>Optional: Use
+            threading
+            to process multiple images simultaneously.</em></p>
+    <p data-line="267" class="code-line" dir="auto"><strong>Turtle Graphics</strong> - This is a common project where
+        you
+        create a floor of 20 x 20 squares. Using various commands you tell a turtle to draw a line on the floor. You
+        have
+        move forward, left or right, lift or drop pen etc. Do a search online for "Turtle Graphics" for more
+        information.
+        <em>Optional: Allow the program to read in the list of commands from a file.</em>
+    </p>
+    <p data-line="269" class="code-line" dir="auto"><strong>GIF Creator</strong> A program that puts together multiple
+        images (PNGs, JPGs, TIFFs) to make a smooth GIF that can be exported. <em>Optional: Make the program convert
+            small
+            video files to GIFs as well.</em></p>
+    <h2 data-line="272" class="code-line" dir="auto" id="security" tabindex="-1">Security</h2>
+    <p data-line="275" class="code-line" dir="auto"><strong>Caesar cipher</strong> - Implement a Caesar cipher, both
+        encoding and decoding. The key is an integer from 1 to 25. This cipher rotates the letters of the alphabet (A to
+        Z).
+        The encoding replaces each letter with the 1st to 25th next letter in the alphabet (wrapping Z to A). So key 2
+        encrypts "HI" to "JK", but key 20 encrypts "HI" to "BC". This simple "monoalphabetic substitution cipher"
+        provides
+        almost no security, because an attacker who has the encoded message can either use frequency analysis to guess
+        the
+        key, or just try all 25 keys.</p>
+    <button class="back-to-top hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="back-to-top-icon" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+        </svg>
+    </button>
+    <div class="progress-bar" />
+    <script>
+        const showOnPx = 100;
+        const backToTopButton = document.querySelector(".back-to-top")
+
+        const scrollContainer = () => {
+            return document.documentElement || document.body;
+        };
+
+        document.addEventListener("scroll", () => {
+            if (scrollContainer().scrollTop > showOnPx) {
+                backToTopButton.classList.remove("hidden")
+            } else {
+                backToTopButton.classList.add("hidden")
+            }
+        })
+        const goToTop = () => {
+            document.body.scrollIntoView({
+                behavior: "smooth",
+            });
+        };
+        backToTopButton.addEventListener("click", goToTop)
+
+        const pageProgressBar = document.querySelector(".progress-bar")
+        document.addEventListener("scroll", () => {
+            const scrolledPercentage =
+                (scrollContainer().scrollTop /
+                    (scrollContainer().scrollHeight - scrollContainer().clientHeight)) *
+                100;
+
+            pageProgressBar.style.width = `${scrolledPercentage}%`
+
+            if (scrollContainer().scrollTop > showOnPx) {
+                backToTopButton.classList.remove("hidden");
+            } else {
+                backToTopButton.classList.add("hidden");
+            }
+        });
+     </script>
+
+</body>
+
+</html>
