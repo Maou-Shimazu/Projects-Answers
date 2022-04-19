@@ -486,7 +486,7 @@ impl<'a> Parser<'a> {
             Type::ParenLeft => {
                 let start = self.token.range.start;
                 self.adv();
-                let expr = self.expression();
+                let expr = self.term();
                 if self.token.token_type != Type::ParenRight {
                     self.err(
                         "Expected parenthesis to be closed!".to_owned(),
@@ -775,6 +775,7 @@ fn main() {
 
             _ => (),
         };
+        // leaks source string so that it lives long enough (until the program ends) for the variables to be persistant
         let src = Box::leak(src.into_boxed_str());
         let mut lexer = Lexer::from(src);
         let mut tokens = Vec::with_capacity(src.len());
