@@ -1,9 +1,8 @@
 *.exe
 *.pdb
-/target
+target
 /src
 /.vscode
-*.toml
 *.lock
-*.json
+package-lock.json
 node_modules
