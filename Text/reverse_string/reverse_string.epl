@@ -1,5 +1,0 @@
-define variable text as string
-print "Enter the string you want reversed..."
-input text
-reverse text
-print text
