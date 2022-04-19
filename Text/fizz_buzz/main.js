@@ -1,5 +1,3 @@
-// fizz_buzz in js 
-
 function fizzBuzz(n) {
     for (var i = 1; i <= n; i++) {
         if (i % 15 == 0) {
