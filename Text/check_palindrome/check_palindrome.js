@@ -1,8 +1,7 @@
 // check if the word is a palindrome 
 
-
 function Palindrome(word){ 
-    var reverse = word.split('').reverse().join('');
+    let reverse = word.split('').reverse().join('');
     if (word == reverse){
         console.log(word + " is a palindrome");
     }
