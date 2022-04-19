@@ -1,8 +1,12 @@
 // Site checker in js
 // made by: @mini51
 
+
+//! Warning:  if you use gmail you are going to get warnings since gmail is blocking nodeMailer
+
+
 const readlineSync = require("readline-sync"); 
-const http = require("http");
+const fetch = require("node-fetch");
 const nodemailer = require("nodemailer");
 
 
@@ -16,36 +20,33 @@ checkInterval = checkInterval * 1000;
 
 // create email transporter
 let transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: "Service", // Gmail, etc.
     auth: {
         user: "Email",
-        pass: "Email-Password"
+        pass: "password"
     }
 });
 
 
 
 setInterval(() => {
-    http.get(url, (res) => {
-        console.log(`The server is up and running on ${url}`);
-    }).on("error", (err) => {
-        //send an email to the user
-        console.log(`The server is down on ${url}`);
-        console.log(`Sending an email to ${alerEmail}`);
-
-        transporter.MailMessage({
-            from: "",
-            to: alerEmail,
-            subject: "The server is down",
-            text: `The server you are listening to is down on ${url}`
-            
-        }).send((err, info) => {
-            if (err) {
-                console.log(err);
+    fetch(url)
+        .then(res => res.text())
+        .then(body => {
+            if (body.includes("404")) {
+                console.log("Site is down");
+                transporter.sendMail({
+                    from: "Email",
+                    to: alerEmail,
+                    subject: "Site is down",
+                    text: "Site is down"
+                });
             } else {
-                console.log(`Email sent to ${alerEmail}`);
+                console.log("Site is up");
             }
+        })
+        .catch(err => {
+            console.log('Error: ' + err);
         });
-    });
 }, checkInterval);
 
