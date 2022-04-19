@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class Fibonacci {
+public class fibonacci_sequence {
     public static void main(String[] args){
         //Example
         fibonacci(5);
