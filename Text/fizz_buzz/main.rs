@@ -1,4 +1,3 @@
-
 fn main(){
     for i in 0..101 {
         if i % 3 == 0 { print!("fizz ") }
