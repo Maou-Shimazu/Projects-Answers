@@ -748,7 +748,7 @@ fn main() {
 
             "time" => {
                 show_time = !show_time;
-                println!("Now{} showing elapsed time for computing.", if show_parsed { "" } else { " not" });
+                println!("Now{} showing elapsed time for computing.", if show_time { "" } else { " not" });
                 continue;
             }
 
