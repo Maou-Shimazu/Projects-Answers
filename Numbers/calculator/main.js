@@ -1,4 +1,3 @@
-//js calculator 
 let readlineSync = require("readline-sync");
 
 // get numbers from user
