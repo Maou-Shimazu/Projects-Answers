@@ -2,6 +2,8 @@
 // there are possibly many things that can be fixed to either improve code-style or bugs
 // will compile without errors on Rust v1.60.0
 
+extern crate core;
+
 use std::iter::Peekable;
 use std::ops::Range;
 use std::str::Chars;
@@ -556,15 +558,6 @@ impl Results {
     }
 }
 
-impl Display for Results {
-    fn fmt(&self, f : &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", match self {
-            Results::Number(value) => value.to_string(),
-            Results::Invalid => "Runtime Error".to_owned()
-        })
-    }
-}
-
 /// Interprets the parsed AST structure and returns a [`Results`]
 struct Interpreter<'a> {
     exprs : Vec<Rc<AST<'a>>>,
@@ -817,12 +810,17 @@ fn main() {
                     println!("Time taken to compute: {:?}", elapsed.elapsed());
                 }
                 for value in values {
-                    println!("Result: {}",
-                             if let Some(value) = value {
-                                 value.to_string()
-                             } else {
-                                 "Runtime Error".to_owned()
-                             });
+                    let out = match value {
+                        Some(Results::Number(num)) => {
+                            if num.is_infinite() || num.is_nan() {
+                                "Invalid - Infinite | Not a Number".to_owned()
+                            } else {
+                                num.to_string()
+                            }
+                        },
+                        _ => "Runtime Error".to_owned(),
+                    };
+                    println!("Result: {}", out);
                 }
                 vars = new_vars;
             }
@@ -832,4 +830,4 @@ fn main() {
         prev = src;
     }
 }
-// 707 loc - cloc
+// 705 loc - cloc
