@@ -7,6 +7,6 @@ func main() {
     var str string
     fmt.Scan(&str)
     for i := len(str); i > 0; i-- {
-      fmt.Println(string(str[i - 1]))
+        fmt.Println(string(str[i - 1]))
     }
 }
