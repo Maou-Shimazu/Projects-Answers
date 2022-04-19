@@ -1,4 +1,3 @@
-# binary to decimal 
 import math 
 
 binary = input('Enter a binary number: ')
