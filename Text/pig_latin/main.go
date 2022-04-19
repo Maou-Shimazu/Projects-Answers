@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	vowels := []string{"a", "e", "i", "o", "u", "A", "E", "I", "O", "U"}
+  vowels := []string{"a", "e", "i", "o", "u", "A", "E", "I", "O", "U"}
   var break_index int
   fmt.Println("Enter your word...")
   var word string
