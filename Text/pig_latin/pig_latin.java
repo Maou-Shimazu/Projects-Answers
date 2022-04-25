@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class PigLatin {
+class pig_latin {
     public static void main(String[] args) {
         System.out.print("Enter a word: ");
         System.out.println(pigLatin(new Scanner(System.in).nextLine()));
