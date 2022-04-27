@@ -1,7 +1,7 @@
 fn main() {
     let original = "Hello World";
     let encrypted = original.shift_right(2);
-    let decrypted = &encrypted.shift_left(2);
+    let decrypted = encrypted.shift_left(2);
     println!("{}", encrypted); // Outputs Jgnnq Yqtnf
     println!("{}", decrypted); // Outputs Hello World
 }
