@@ -1,8 +1,18 @@
 import basics
+import 'sys/cstdio.adept'
+import 'sys/cstdlib.adept'
+import 'sys/cstring.adept'
 
 func main() {
-    print("Enter your word: ")
-    x String
-    scan(&x)
-    print(x)
+    while true {
+        printf("Enter your word (q to quit): ")
+        x: String
+        scan(&x)
+        if x == "q" {
+            break
+        }
+        y String = x.sub(1, strlen(x))
+        print(y + x[0] + 'a'ub + 'y'ub)
+        print("")
+    }
 }
