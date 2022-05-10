@@ -1,0 +1,8 @@
+import basics
+
+func main() {
+    print("Enter your word: ")
+    x String
+    scan(&x)
+    print(x)
+}
