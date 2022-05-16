@@ -7,7 +7,7 @@ int main(void) {
         bool encrypt = type == "encrypt";
         std::string message;
         std::cout << "Enter the message you want " << (encrypt? "encrypted" : "decrypted") << "..." << std::endl;
-        std::cin >> message;
+        std::getline(std::cin >> std::ws, message);
         int shift;
         std::cout << "Enter the shift number..." << std::endl;
         std::cin >> shift;
@@ -21,11 +21,11 @@ int main(void) {
                 if (i != -1)
                         output += a_lower[(i + shift + 26) % 26];
                 else if (j != -1)
-                        output += a_upper[(i + shift + 26) % 26];
+                        output += a_upper[(j + shift + 26) % 26];
                 else
                         output += c;
         }
-  
+
         std::cout << output << std::endl;
         return 0;
 }
