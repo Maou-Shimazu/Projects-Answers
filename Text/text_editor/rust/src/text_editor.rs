@@ -62,3 +62,4 @@ impl Sandbox for Counter {
 pub fn main() -> iced::Result {
     Counter::run(Settings::default())
 }
+      
