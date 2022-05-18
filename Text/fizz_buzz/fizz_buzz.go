@@ -1,18 +1,18 @@
 package main
 
 import (
-	"fmt"
+  "fmt"
 )
 
 func main() {
-	for i := 0; i < 100; i++ {
-    if i % 3 == 0 {
+  for i := 0; i < 100; i++ {
+    if (i % 3 == 0) && (i % 5 == 0) {
+      fmt.Println("FizzBuzz")
+    } else if i % 3 == 0 {
       fmt.Println("Fizz")
-    }
-    if i % 5 == 0 {
+    } else if i % 5 == 0 {
       fmt.Println("Buzz")
-    }
-    if i % 3 != 0 && i % 5 != 0 {
+    } else {
       fmt.Println(i)
     }
   }
