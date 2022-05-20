@@ -6,7 +6,8 @@
 #define NLET 26 // number of letters
 #define UTL 32 // upper to lower
 
-// typedefing char pointer to string
+
+// typedefing char pointer to string for readability
 typedef char *string;
 
 static size_t allocations = 0;
@@ -16,7 +17,8 @@ static string *vault = NULL;
 
 // to add allocated memory into vault
 static void push(string mem) {
-        // Resize array so as to append string
+
+    // Resize array so as to append string
     string *temp = realloc(vault, sizeof(string) * (allocations+1));
     if (temp == NULL) {
         free(mem);
@@ -43,7 +45,7 @@ static void dalloc(void) {
 // Function to take user input, prevents buffer overflow (;
 string input(void) {
 
-    int space = 5;
+    size_t space = 5, cursor = 0;
     string buffer = (string)malloc(space);
     
     if(buffer == NULL) { 
@@ -51,7 +53,7 @@ string input(void) {
         exit(EXIT_FAILURE);
     };
 
-    int ch = EOF, cursor = 0;
+    int ch = EOF;
 
     while((ch = getchar()) != '\n' && ch != EOF) { 
         
@@ -88,28 +90,27 @@ string generateKey(string key, string cred){
     cred_len = strlen(cred);
     key_len = strlen(key);
 
-    string valid_key = (string)malloc(sizeof(char) * key_len+1); 
     string gen_key = (string)malloc(sizeof(char) * cred_len+1);
 
-    if(gen_key == NULL || valid_key == NULL){
+    if(gen_key == NULL){
         free(gen_key);
-        free(valid_key);
         exit(EXIT_FAILURE);
     }
 
-    // append alphabetic characters in valid_key
+    // append alphabetic characters in key
     for(i = 0, j = 0; i < key_len; ++i){
         if(isalpha(key[i]))
-            valid_key[j++] = key[i];
+            key[j++] = key[i];
     }
-    
+    key[j] = '\0';
+
     // checks for empty value
-    if(!strcmp(valid_key, "")){
-        strcpy(gen_key, valid_key);
+    if(!strcmp(key, "")){
+        strcpy(gen_key, key);
         goto ret;
     }
 
-    key_len = strlen(valid_key);
+    key_len = strlen(key);
     
     // generating key with user provided key
     for(i = 0, j = 0; i < cred_len; ++i){
@@ -120,13 +121,12 @@ string generateKey(string key, string cred){
         if(!isalpha(i[cred])){
             gen_key[i] = cred[i];
         } else { // if non-alphabetic character, gen_key is appended with keys' current element
-            gen_key[i] = valid_key[j++]; 
+            gen_key[i] = key[j++]; 
         }
     }
     gen_key[i] = '\0'; // null termination  
 
     ret:
-        push(valid_key);
         push(gen_key);
         return gen_key;
 }
