@@ -6,30 +6,24 @@
 #define NLET 26 // number of letters
 #define UTL 32 // upper to lower
 
-// Function to delete element at the given index from string 
-int purge(char*data, int idx, int len){
+typedef char *string;
 
-    int i;
-    for (i = idx; i < (len)-1; i++)
-        *(data+i) = *(data+i+1);
-
-    *(data+i) = '\0';
-    return --len;
-
-}
-
-void dealloc(char** buffer) {
+// frees buffer and sets it to NULL
+void dealloc(string* buffer) {
     free(*buffer);
     *buffer = NULL;
 }
 
 // Function to take user input, prevents buffer overflow (;
-char* input() {
+string input() {
 
-    int buffsize = 256;
-    char* buffer = (char*)malloc(buffsize);
+    int space = 24;
+    string buffer = (string)malloc(space);
     
-    if(buffer == NULL) exit(EXIT_FAILURE);
+    if(buffer == NULL) { 
+        dealloc(&buffer); 
+        exit(EXIT_FAILURE);
+    };
 
     int ch = EOF, cursor = 0;
 
@@ -37,39 +31,55 @@ char* input() {
         
         buffer[cursor++] = (char)ch;
 
-        /* if cursor crosses current buffer size
-            it's doubled in size and new size gets reallocated */
-        if(cursor >= buffsize - 1) { 
-            buffsize <<=1;
-            buffer = (char*)realloc(buffer, buffsize);
-			if(buffer == NULL) exit(EXIT_FAILURE);
+        /* if cursor crosses current buffer space
+            it's doubled in space and new space gets reallocated */
+        if(cursor >= space - 1) { 
+            space <<=1;
+            buffer = (string)realloc(buffer, space);
+			if(buffer == NULL) {
+                dealloc(&buffer); 
+                exit(EXIT_FAILURE);
+            };
         }
         
     }
-    buffer[cursor] = '\0';
+    buffer[cursor] = '\0'; // null termination
+
+    // Minimize buffer
+    buffer = (string)realloc(buffer, strlen(buffer)+1);
     
     return buffer;
 }
 
-char* key_generator(char*key, char*cred){
+string key_generator(string key, string cred){
 
-    size_t cred_len, key_len, j = 0, i;
+    size_t cred_len, key_len, j, i;
 
     cred_len = strlen(cred);
     key_len = strlen(key);
 
-    char *gen_key = (char*)malloc(sizeof(char) * cred_len+1);
+    string valid_key = (string)malloc(sizeof(char) * key_len+1); 
+    string gen_key = (string)malloc(sizeof(char) * cred_len+1);
 
-    if(gen_key == NULL)
-        exit(1);
+    if(gen_key == NULL || valid_key == NULL){
+        dealloc(&key); dealloc(&gen_key);
+        dealloc(&valid_key);
+        exit(EXIT_FAILURE);
+    }
 
-    // removes non-alphabetic character from key :>
-    for(i = 0; i < key_len; ++i){
-        while(isalpha(key[i]) == 0)
-            key_len = purge(key, i, key_len);
+    // append alphabetic characters in valid_key
+    for(i = 0, j = 0; i < key_len; ++i){
+        if(isalpha(key[i]))
+            valid_key[j++] = key[i];
+    }
+    // checks for empty value
+    if(!strcmp(valid_key, "")){
+        strcpy(gen_key, valid_key);
+        goto ret;
     }
     // generating key with user provided key
-    for(i = 0; i < cred_len; ++i){
+    key_len = strlen(valid_key);
+    for(i = 0, j = 0; i < cred_len; ++i){
 
         if(j >= key_len) 
             j = 0;
@@ -77,23 +87,30 @@ char* key_generator(char*key, char*cred){
         if(!isalpha(i[cred])){
             gen_key[i] = cred[i];
         } else { // if non-alphabetic character, gen_key is appended with keys' current element
-            gen_key[i] = key[j]; 
-            ++j;
+            gen_key[i] = valid_key[j++]; 
         }
     }
     gen_key[i] = '\0';   
-    dealloc(&key);
-    return gen_key;
+
+    ret:
+        dealloc(&key); dealloc(&valid_key);
+        return gen_key;
 }
 
 
-void eval(char* cred, char* key, char* mode){
+void eval(string cred, string key, string mode){
 
     size_t cred_len = strlen(cred), i;
-    char *res = (char*)malloc(sizeof(char) * cred_len+1);
+    char *res = (string)malloc(sizeof(char) * cred_len+1);
 
-    if(res == NULL)
-        exit(1);
+    if(res == NULL){
+        goto deallocation;
+    }
+    // checks for empty key and data
+    if(!strcmp(key, "") || !strcmp(cred, "")) {
+        puts(cred);
+        goto deallocation;
+    }
 
     if(!strcmp(mode, "encrypt")){
         for(i = 0; i < cred_len; ++i){
@@ -106,13 +123,13 @@ void eval(char* cred, char* key, char* mode){
                 // checks if the encrypted char is greater than Z
                 if(res[i] > 90)
                     //encrypted character is subtracted with 26, so it's between A and Z
-                    res[i] = i[res]-NLET;
+                    res[i] -= NLET;
             } else // if element is a non-alphabetic character, res is appended with the element
                 res[i] = cred[i];
 
             // matching case in both data and encrypted data
             if(islower(cred[i])){
-                res[i] = res[i]+UTL;
+                res[i] += UTL;
             }
         }
         res[i] = '\0'; // null terminator
@@ -128,13 +145,13 @@ void eval(char* cred, char* key, char* mode){
                 // checks if the decrypted char is lesser than A
                 if(res[i] < 65)
                     //decrypted character is added with 26, so it's between A and Z
-                    res[i] = i[res]+NLET;
+                    res[i] += NLET;
             }else //else decryptedCache is appended with creds' current element
                 res[i] = cred[i];
 
             // matching case in both encrypted and decrypted data
             if(islower(cred[i])){
-                res[i] = res[i]+UTL;
+                res[i] += UTL;
             }
         }
         res[i] = '\0'; // null terminator
@@ -151,13 +168,13 @@ void eval(char* cred, char* key, char* mode){
 int main(void) {
 
     fprintf(stdout, "\033[32mEnter the mode you want to perform\033[0m: ");
-    char* mode = input();
+    string mode = input();
     fprintf(stdout, "\033[33mEnter the data string you want to %s\033[0m: ", mode);
-    char* data = input();
+    string data = input();
     fprintf(stdout, "\033[36mEnter the key you want your data to %s with\033[0m: ", mode);
-    char* key = input();
-    char* genKey = key_generator(key, data);
+    string key = input();
+    string genKey = key_generator(key, data);
     eval(data, genKey, mode);
 
-return 0;
+    return 0;
 }
