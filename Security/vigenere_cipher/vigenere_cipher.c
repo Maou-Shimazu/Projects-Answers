@@ -6,22 +6,48 @@
 #define NLET 26 // number of letters
 #define UTL 32 // upper to lower
 
+// typedefing char pointer to string
 typedef char *string;
 
-// frees buffer and sets it to NULL
-void dealloc(string* buffer) {
-    free(*buffer);
-    *buffer = NULL;
+static size_t allocations = 0;
+
+// vault will store all allocated memory on vault
+static string *vault = NULL;
+
+// to add allocated memory into vault
+static void push(string mem) {
+        // Resize array so as to append string
+    string *temp = realloc(vault, sizeof(string) * (allocations+1));
+    if (temp == NULL) {
+        free(mem);
+        return;
+    }
+    vault = temp;
+
+    // Append string to array
+    vault[allocations++] = mem;
+}
+
+// deallocates memory on the heap iteratively
+static void dalloc(void) {
+
+    if(vault != NULL) {
+
+        for(size_t idx = 0; idx < allocations; ++idx) {
+            free(vault[idx]);
+        }
+        free(vault);
+    }
 }
 
 // Function to take user input, prevents buffer overflow (;
-string input() {
+string input(void) {
 
-    int space = 24;
+    int space = 5;
     string buffer = (string)malloc(space);
     
     if(buffer == NULL) { 
-        dealloc(&buffer); 
+        free(buffer);
         exit(EXIT_FAILURE);
     };
 
@@ -37,21 +63,25 @@ string input() {
             space <<=1;
             buffer = (string)realloc(buffer, space);
 			if(buffer == NULL) {
-                dealloc(&buffer); 
+                free(buffer);
                 exit(EXIT_FAILURE);
-            };
+            }
         }
         
     }
+
     buffer[cursor] = '\0'; // null termination
 
     // Minimize buffer
     buffer = (string)realloc(buffer, strlen(buffer)+1);
-    
+
+    // pushing allocated memory into vault
+    push(buffer);
+
     return buffer;
 }
 
-string key_generator(string key, string cred){
+string generateKey(string key, string cred){
 
     size_t cred_len, key_len, j, i;
 
@@ -62,8 +92,8 @@ string key_generator(string key, string cred){
     string gen_key = (string)malloc(sizeof(char) * cred_len+1);
 
     if(gen_key == NULL || valid_key == NULL){
-        dealloc(&key); dealloc(&gen_key);
-        dealloc(&valid_key);
+        free(gen_key);
+        free(valid_key);
         exit(EXIT_FAILURE);
     }
 
@@ -72,13 +102,16 @@ string key_generator(string key, string cred){
         if(isalpha(key[i]))
             valid_key[j++] = key[i];
     }
+    
     // checks for empty value
     if(!strcmp(valid_key, "")){
         strcpy(gen_key, valid_key);
         goto ret;
     }
-    // generating key with user provided key
+
     key_len = strlen(valid_key);
+    
+    // generating key with user provided key
     for(i = 0, j = 0; i < cred_len; ++i){
 
         if(j >= key_len) 
@@ -90,10 +123,11 @@ string key_generator(string key, string cred){
             gen_key[i] = valid_key[j++]; 
         }
     }
-    gen_key[i] = '\0';   
+    gen_key[i] = '\0'; // null termination  
 
     ret:
-        dealloc(&key); dealloc(&valid_key);
+        push(valid_key);
+        push(gen_key);
         return gen_key;
 }
 
@@ -101,15 +135,11 @@ string key_generator(string key, string cred){
 void eval(string cred, string key, string mode){
 
     size_t cred_len = strlen(cred), i;
-    char *res = (string)malloc(sizeof(char) * cred_len+1);
+    string res = (string)malloc(sizeof(char) * cred_len+1);
 
     if(res == NULL){
-        goto deallocation;
-    }
-    // checks for empty key and data
-    if(!strcmp(key, "") || !strcmp(cred, "")) {
-        puts(cred);
-        goto deallocation;
+        free(res);
+        exit(EXIT_FAILURE);
     }
 
     if(!strcmp(mode, "encrypt")){
@@ -132,7 +162,7 @@ void eval(string cred, string key, string mode){
                 res[i] += UTL;
             }
         }
-        res[i] = '\0'; // null terminator
+        res[i] = '\0'; // null termination
 
     } else if(!strcmp(mode, "decrypt")){
 
@@ -154,18 +184,27 @@ void eval(string cred, string key, string mode){
                 res[i] += UTL;
             }
         }
-        res[i] = '\0'; // null terminator
+        res[i] = '\0'; // null termination
+        
     } else { // if mode is not encrypt or decrypt throw error;
         fprintf(stderr, "\033[31mModeError: %s is not a valid mode\033[0m\n", mode);
-        goto deallocation;
+        goto exec;
     }
-    puts(res);
 
-    deallocation: 
-        dealloc(&mode); dealloc(&cred); dealloc(&res); dealloc(&key);
+    // checks for empty key and data
+    if(!strcmp(key, "") || !strcmp(cred, "")) {
+        strcpy(res, cred);
+    }
+
+    puts(res);
+    exec:
+        push(res);
 }
 
 int main(void) {
+
+    // call dalloc before exiting the program to free memory allocated on heap
+    atexit(dalloc);
 
     fprintf(stdout, "\033[32mEnter the mode you want to perform\033[0m: ");
     string mode = input();
@@ -173,7 +212,7 @@ int main(void) {
     string data = input();
     fprintf(stdout, "\033[36mEnter the key you want your data to %s with\033[0m: ", mode);
     string key = input();
-    string genKey = key_generator(key, data);
+    string genKey = generateKey(key, data);
     eval(data, genKey, mode);
 
     return 0;
