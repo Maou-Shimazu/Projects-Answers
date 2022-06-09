@@ -113,7 +113,7 @@ void encode(string plaintext){
         exit(EXIT_FAILURE);
     }
 
-    int i, j, k, dump_size;
+    int i, j, dump_size;
 
     for( i=0; plaintext[i] != '\0'; ++i ) {
         /*
