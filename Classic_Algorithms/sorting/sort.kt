@@ -254,7 +254,55 @@ fun Array<Int>.mergeSort() = mergeSort(this, end = size - 1)
 fun IntArray.mergeSort() = mergeSort(this, end = size - 1)
 fun MutableList<Int>.mergeSort() = mergeSort(this, end = size - 1)
 
-//If you use mergeSort() as an extension, it has to be called separately from usage (Or it will be considered as a Unit)
+/**
+ * Inlined quick sort, swapping in groups of two
+ */
+private fun Array<Int>.bubbleSort(){
+    (size - 1).repeatIndexed { i ->
+        (size - i - 1).repeatIndexed { j ->
+            //Swap the values of current and next index
+            if (this[j] > this[j + 1]){
+                val tempJ = this[j]
+                this[j] = this[j+1]
+                this[j+1] = tempJ
+            }
+        }
+    }
+}
+
+/**
+ * Inlined quick sort, swapping in groups of two
+ */
+private fun IntArray.bubbleSort(){
+    (size - 1).repeatIndexed { i ->
+        (size - i - 1).repeatIndexed { j ->
+            //Swap the values of current and next index
+            if (this[j] > this[j + 1]){
+                val tempJ = this[j]
+                this[j] = this[j+1]
+                this[j+1] = tempJ
+            }
+        }
+    }
+}
+
+/**
+ * Inlined quick sort, swapping in groups of two
+ */
+private fun MutableList<Int>.bubbleSort(){
+    (size - 1).repeatIndexed { i ->
+        (size - i - 1).repeatIndexed { j ->
+            //Swap the values of current and next index
+            if (this[j] > this[j + 1]){
+                val tempJ = this[j]
+                this[j] = this[j+1]
+                this[j+1] = tempJ
+            }
+        }
+    }
+}
+
+//If you use an extension, it has to be called separately from usage (Or it will be considered as a Unit)
 fun main() {
     val randomSize = Random.nextInt(3,20)
 
@@ -275,4 +323,22 @@ fun main() {
     println("List<Int> - Unsorted : $c")
     c.mergeSort()
     println("List<Int> - Sorted   : $c")
+
+    println("\nRandom Bubble-Sort of size: $randomSize")
+
+    val d = Array(randomSize){Random.nextInt(0, 100)}
+    val e = IntArray(randomSize){Random.nextInt(0, 100)}
+    val f = MutableList(randomSize){Random.nextInt(0, 100)}
+
+    println("Array<Int> - Unsorted: ${d.contentToString()}")
+    d.bubbleSort()
+    println("Array<Int> - Sorted  : ${d.contentToString()}")
+
+    println("IntArray - Unsorted  : ${e.contentToString()}")
+    e.bubbleSort()
+    println("IntArray - Sorted    : ${e.contentToString()}")
+
+    println("List<Int> - Unsorted : $f")
+    f.bubbleSort()
+    println("List<Int> - Sorted   : $f")
 }
