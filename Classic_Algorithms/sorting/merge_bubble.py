@@ -18,4 +18,3 @@ def bubble_sort(arr: Arr) -> Arr:
                 pass
 
     return arr
-
